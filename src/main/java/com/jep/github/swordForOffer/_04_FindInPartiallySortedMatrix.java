@@ -33,7 +33,7 @@ public class _04_FindInPartiallySortedMatrix {
     while (r <= rows - 1 && c >= cols - 1) {
       if (array[r][c] == number) {
         return true;
-      } else if (array[r][c] > number) {
+      } else if (array[r][c] < number) {
         r++;
       } else {
         c--;
