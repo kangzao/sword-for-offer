@@ -26,56 +26,43 @@ package com.jep.github.swordForOffer;
 //    对应leetcode 153
 public class _11_MinNumberInRotatedArray {
 
-
-    public static int solution(int[] nums) {
-        int n = nums.length - 1;
-        if (n < 0) return -1;
-        while (n > 0 && nums[n] == nums[0]) n--;
-        if (nums[n] >= nums[0]) return nums[0];
-        int l = 0, r = n;
-        while (l < r) {
-            int mid = l + r >> 1;       // [l, mid], [mid + 1, r]
-            if (nums[mid] < nums[0]) r = mid;
-            else l = mid + 1;
-            System.out.println("L=" + l + ",R=" + r);
-        }
-        return nums[r];
+  public static int minNumberInRotateArray(int[] rotateArray) {
+    if (rotateArray.length == 0) {
+      return 0;
     }
 
-    public static int minNumberInRotatedArray(int[] array) {
-        int start = 0;
-        int end = array.length - 1;
-        while (end > 0 && array[end] == array[0]) end--;
-        if (array[end] >= array[start]) {
-            return array[start];
-        }
+    int low = 0;
+    int high = rotateArray.length - 1;
+    int mid = 0;
 
-        while (start < end) {
-
-            int mid = (end - start) / 2 + start;
-//            System.out.println(mid);
-            if (array[mid] < array[start]) {
-                end = mid;
-            } else {
-                start = mid + 1;
-            }
-            System.out.println("start=" + start + ",end=" + end);
-
-        }
-        return array[end];
+    while (low < high) {
+      // 子数组是非递减的数组，10111
+      if (rotateArray[low] < rotateArray[high]) {
+        return rotateArray[low];
+      }
+      mid = low + (high - low) / 2;
+      if (rotateArray[mid] > rotateArray[low]) {
+        low = mid + 1;
+      } else if (rotateArray[mid] < rotateArray[high]) {
+        high = mid;
+      } else {
+        low++;
+      }
     }
+    return rotateArray[low];
+  }
 
 
-    public static void main(String args[]) {
-//        int[] array = {3, 3, 5, 2, 2};
-//        System.out.println(minNumberInRotatedArray(array));
-        int[] array1 = {2, 2, 2, 0, 1};
-        System.out.println(minNumberInRotatedArray(array1));
+  public static void main(String args[]) {
+    int[] array = {3, 3, 5, 2, 2};
+    System.out.println(minNumberInRotateArray(array));
+    int[] array1 = {2, 2, 2, 0, 1};
+    System.out.println(minNumberInRotateArray(array1));
 
-        System.out.println(solution(array1));
+//        System.out.println(solution(array1));
 
-        int[] array2 = {2, 0, 1, 2, 2, 2, 2};
-        System.out.println(minNumberInRotatedArray(array2));
-    }
+    int[] array2 = {2, 0, 1, 2, 2, 2, 2};
+    System.out.println(minNumberInRotateArray(array2));
+  }
 
 }
