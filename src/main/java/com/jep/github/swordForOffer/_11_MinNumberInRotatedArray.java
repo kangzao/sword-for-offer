@@ -26,37 +26,56 @@ package com.jep.github.swordForOffer;
 //    对应leetcode 153
 public class _11_MinNumberInRotatedArray {
 
-  public static int minNumberInRotatedArray(int[] array) {
-    int start = 0;
-    int end = array.length - 1;
-    while (start < end) { //这里不能<=，否则会数组越界 因为start=mid+1
 
-      if (array[end] > array[start]) {
-        return array[start];
-      }
-      //
-      int mid = (end - start) / 2 + start;
-      if (array[mid] >= array[start]) {
-        //最小值出现在mid右侧
-        start = mid + 1;  //这里+1去掉会死循环 while无法退出
-      } else {
-        //最小值出现在左半边 同时mid不能丢弃
-        end = mid; //这里不能-1
-      }
-      System.out.println("start=" + start + ",end=" + end + "，mid=" + mid);
+    public static int solution(int[] nums) {
+        int n = nums.length - 1;
+        if (n < 0) return -1;
+        while (n > 0 && nums[n] == nums[0]) n--;
+        if (nums[n] >= nums[0]) return nums[0];
+        int l = 0, r = n;
+        while (l < r) {
+            int mid = l + r >> 1;       // [l, mid], [mid + 1, r]
+            if (nums[mid] < nums[0]) r = mid;
+            else l = mid + 1;
+            System.out.println("L=" + l + ",R=" + r);
+        }
+        return nums[r];
     }
-    return array[start];
-  }
+
+    public static int minNumberInRotatedArray(int[] array) {
+        int start = 0;
+        int end = array.length - 1;
+        while (end > 0 && array[end] == array[0]) end--;
+        if (array[end] >= array[start]) {
+            return array[start];
+        }
+
+        while (start < end) {
+
+            int mid = (end - start) / 2 + start;
+//            System.out.println(mid);
+            if (array[mid] < array[start]) {
+                end = mid;
+            } else {
+                start = mid + 1;
+            }
+            System.out.println("start=" + start + ",end=" + end);
+
+        }
+        return array[end];
+    }
 
 
-  public static void main(String args[]) {
-    int[] array = {3, 3, 5, 2, 2};
-    System.out.println(minNumberInRotatedArray(array));
-    int[] array1 = {2, 2, 2, 0, 1};
-    System.out.println(minNumberInRotatedArray(array1));
+    public static void main(String args[]) {
+//        int[] array = {3, 3, 5, 2, 2};
+//        System.out.println(minNumberInRotatedArray(array));
+        int[] array1 = {2, 2, 2, 0, 1};
+        System.out.println(minNumberInRotatedArray(array1));
 
-    int[] array2 = {2, 0, 0, 2};
-    System.out.println(minNumberInRotatedArray(array2));
-  }
+        System.out.println(solution(array1));
+
+        int[] array2 = {2, 0, 1, 2, 2, 2, 2};
+        System.out.println(minNumberInRotatedArray(array2));
+    }
 
 }
