@@ -8,10 +8,10 @@ public class ListNode {
   int val; // 结点的值
   ListNode next; // 下一个结点
 
-  public void printNode(ListNode node) {
+  public void printNode() {
     StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append(node.val).append("->");
-    ListNode nxt = node.next;
+    stringBuilder.append(this.val).append("->");
+    ListNode nxt = this.next;
     while (nxt != null) {
       stringBuilder.append(nxt.val).append("->");
       nxt = nxt.next;
