@@ -8,7 +8,7 @@ package com.jep.github.swordForOffer;
 // 题目：给定单向链表的头指针和一个结点指针，定义一个函数在O(1)时间删除该结点。 这道题很傻比，尾节点用java语言无法清空。
 //    A -> B -> C -> D
 //    A -> B -> D(new) -> D(original)
-public class _18_DeleteNodeInList {
+public class _18_01_DeleteNodeInList {
 
     public static void deleteNode(ListNode first, ListNode toBeDel) {
         if (first == null || toBeDel == null) {
