@@ -13,18 +13,36 @@ package com.jep.github.swordForOffer;
  */
 public class _18_02_DeleteDuplicationNode {
 
-    public static void deleteDuplicationNode(ListNode head) {
-        ListNode first = head;
+    public static ListNode deleteDuplicationNode(ListNode head) {
         if (head == null || head.next == null) {
-            return;
+            return head;
         }
-        while (head != null && head.next != null) {
-            ListNode cur = head.next;
-            if (head.val == cur.val) {
-                head.next = cur.next;
+        //当前节点的前一个节点
+        ListNode pre = null;
+        //当前节点
+        ListNode cur = head;
+        while (cur != null && cur.next != null) {
+            //当前节点和下一个节点值相同
+            if (cur.val == cur.next.val) {
+                int val = cur.val;
+                while (cur != null && cur.val == val) {
+                    cur = cur.next;
+                }
+                // 跳出循环得到的是第一个和cur.val不同的结点
+                // pre为空说明头结点就是重复结点，因此需要重新设置头结点
+                if (pre == null) {
+                    head = cur;
+                } else {
+                    // 否则cur之前的pre的下一个结点何cur连接
+                    pre.next = cur;
+                }
+            } else {
+                pre = cur;
+                cur = cur.next;
             }
-            head = head.next;
         }
+        return head;
+
     }
 
 
