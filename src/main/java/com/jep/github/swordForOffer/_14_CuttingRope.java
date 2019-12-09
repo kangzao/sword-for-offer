@@ -14,8 +14,21 @@ package com.jep.github.swordForOffer;
 
 public class _14_CuttingRope {
 
+  public static int cuttingRope(int n) {
+    if (n == 3 || n == 2) {
+      return n - 1;
+    }
+    int res = 1;
+    while (n > 4) {
+      n = n - 3;
+      res = 3 * res;
+    }
+    return res * n;
+  }
 
-  public static void main(String args[]){
-
+  public static void main(String args[]) {
+    System.out.println(cuttingRope(5) + "6");
+    System.out.println(cuttingRope(6) + "9");
+    System.out.println(cuttingRope(7) + "12");
   }
 }
