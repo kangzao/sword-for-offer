@@ -15,13 +15,42 @@ public class _17_Print1ToMaxOfNDigits {
         if (n <= 0) {
             return;
         }
-        StringBuilder sb = new StringBuilder();
+        char[] number = new char[n];
+        //给number数组赋初值0
         for (int i = 0; i < n; i++) {
-            sb.append("0");
+            number[i] = '0';
         }
-//        while (!overFlow(sb, n)) {
-//
-//        }
+        while (!increment(number)) {
+            System.out.println(number);
+        }
+    }
+
+    public static boolean increment(char[] number) {
+        int length = number.length;
+        int carryOver = 0;//进位
+        boolean isOverFlow = false;
+        for (int i = length - 1; i >= 0; i--) {
+            //数字的最低位
+            int sum = number[i] - '0' + carryOver;
+            if (i == length - 1) {
+                sum++;
+            }
+            //产生进位
+            if (sum >= 10) {
+                //已经到达最高位
+                if (i == 0) {
+                    isOverFlow = true;
+                } else {
+                    //没有到达最高位
+                    carryOver = 1;
+                    number[i] = (char) ((sum - 10) + '0');
+                }
+            } else { //没有进位
+                number[i] = (char) ('0' + sum);
+                break;
+            }
+        }
+        return isOverFlow;
     }
 
     //加法如果溢出返回true
@@ -31,12 +60,16 @@ public class _17_Print1ToMaxOfNDigits {
 //        }
 //    }
 
-    public void printNumber(StringBuilder stringBuilder, int n) {
-
+    public static void printNumber(char[] number) {
+        boolean isBeginningZero = true;
+        int length = number.length;
+        for (int i = 0; i < length; i++) {
+            System.out.println(number[i]);
+        }
     }
 
     public static void main(String[] args) {
-        System.out.println('0');
-        System.out.println(0 - '0');
+        print1ToMaxOfNDigits(2);
+//        System.out.println('1' - '0' + 0);
     }
 }
