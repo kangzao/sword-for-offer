@@ -11,8 +11,22 @@ package com.jep.github.swordForOffer;
 // 把9表示成二进制是1001，有2位是1。因此如果输入9，该函数输出2。
 public class _15_NumberOf1InBinary {
 
+  public static int numberOf1InBinary(int n) {
+    int count = 0;
+    int compare = 1;
+    while (compare != 0) {
+      if ((n & compare) != 0) {
+        count++;
+      }
+      compare = compare << 1;
+      System.out.println(compare);
+    }
+    return count;
+  }
 
   public static void main(String args[]) {
 
+    System.out.println(numberOf1InBinary(9));
+    System.out.println(numberOf1InBinary(8));
   }
 }
