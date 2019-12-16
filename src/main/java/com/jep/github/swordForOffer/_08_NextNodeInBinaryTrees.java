@@ -21,7 +21,7 @@ package com.jep.github.swordForOffer;
 //          // \\
 //         6     7
 //    inorder->4265713
-public class _07_NextNodeInBinaryTrees {
+public class _08_NextNodeInBinaryTrees {
 
 
   public static BinaryTreeNode getNext(BinaryTreeNode pNode) {
