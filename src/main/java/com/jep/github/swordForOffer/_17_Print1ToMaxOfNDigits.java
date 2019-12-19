@@ -20,7 +20,7 @@ public class _17_Print1ToMaxOfNDigits {
       number[i] = '0';
     }
     while (!increment(number)) {
-      System.out.println(number);
+      printNumber(number);
     }
   }
 
@@ -60,16 +60,24 @@ public class _17_Print1ToMaxOfNDigits {
 //    }
 
   public static void printNumber(char[] number) {
-    boolean isBeginningZero = true;
-    int length = number.length;
-    for (int i = 0; i < length; i++) {
-      System.out.println(number[i]);
+    boolean flag = false;//是否打印0
+    for (int i = 0; i < number.length; i++) {
+      if (flag) {
+        System.out.print(number[i]);
+      } else {
+        if (number[i] != '0') {
+          flag = true;
+          System.out.print(number[i]);
+        }
+      }
     }
+    System.out.println();
+
   }
 
   public static void main(String[] args) {
     print1ToMaxOfNDigits(2);
-    System.out.println('1' + '2');
+
 //        System.out.println('1' - '0' + 0);
   }
 }
