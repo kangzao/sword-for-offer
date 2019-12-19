@@ -55,6 +55,16 @@ public class _21_ReorderArray {
         int[] array1 = {1, 3, 5, 7, 9};
         reorderArray(array1);
         Util.printArray(array1);
+
+        int numbers[] = {2, 4, 6, 1, 3, 5, 7};
+        reorderArray(numbers);
+        Util.printArray(numbers);
+
+
+        int numbers1[] = {2, 9, 9, 5, 3, 2, 9, 6, 0, 4};
+        reorderArray(numbers1);
+        Util.printArray(numbers1);
+
     }
 
 }
