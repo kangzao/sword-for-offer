@@ -5,8 +5,15 @@ package com.jep.github.swordForOffer;
  */
 public class ListNode {
 
-  int val; // 结点的值
-  ListNode next; // 下一个结点
+  public int val; // 结点的值
+  public ListNode next; // 下一个结点
+
+  public ListNode(int val) {
+    this.val = val;
+  }
+
+  public ListNode() {
+  }
 
   public void printNode() {
     StringBuilder stringBuilder = new StringBuilder();
