@@ -33,8 +33,8 @@ public class _189_RotateArray {
 
         //1、 翻转整体
         reverse(nums, 0, nums.length - 1); //7,6,5,4,3,2,1
-        reverse(nums, 0, k - 1);
-        reverse(nums, k, nums.length - 1);
+        reverse(nums, 0, k - 1);// 翻转前半部分
+        reverse(nums, k, nums.length - 1); //翻转后半部分
 
 
     }
