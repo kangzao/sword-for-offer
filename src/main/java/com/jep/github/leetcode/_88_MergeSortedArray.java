@@ -36,6 +36,7 @@ public class _88_MergeSortedArray {
                 nums1[p--] = nums2[p2--];
             }
         }
+        //第二个数组还有剩余，则继续填充，第一个如果有剩余不用管，因为就是它本身
         while (p2 >= 0) {
             nums1[p--] = nums2[p2--];
         }
