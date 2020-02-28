@@ -23,34 +23,38 @@ Output: [1,2,2,3,5,6]
  */
 public class _88_MergeSortedArray {
 
-  public static int[] mergeSortedArray(int[] nums1, int m, int[] nums2, int n) {
-    //定义三个指针
-    int p = m + n - 1;
-    int p1 = m - 1;
-    int p2 = n - 1;
-    while (p >= 0) {
-      if (p1 < 0 && p2 >= 0) {
-        nums1[p--] = nums2[p2--];
-      }
-
-      if (p2 < 0 && p1 >= 0) {
-        nums1[p--] = nums1[p1--];
-      }
-
-      if (p2 >= 0 && p1 >= 0) {
-        if (nums1[p1] >= nums2[p2]) {
-          nums1[p--] = nums1[p1--];
-        } else {
-          nums1[p--] = nums2[p2--];
+    public static void mergeSortedArray(int[] nums1, int m, int[] nums2, int n) {
+        //定义三个指针
+        int p1 = m - 1;
+        int p2 = n - 1;
+        int p = m + n - 1;
+        //索引必须>=0
+        while (p1 >= 0 && p2 >= 0) {
+            if (nums1[p1] > nums2[p2]) {
+                nums1[p--] = nums1[p1--];
+            } else {
+                nums1[p--] = nums2[p2--];
+            }
         }
-      }
-    }
-    return nums1;
-  }
+        while (p2 >= 0) {
+            nums1[p--] = nums2[p2--];
+        }
 
-  public static void main (String args[]){
-    int[] nums1 = {1, 2, 3, 0, 0, 0}, nums2 = {2, 5, 6};
-    Util.printArray(mergeSortedArray(nums1, 3, nums2, 3));
-  }
+    }
+
+    public static void main(String args[]) {
+        int[] nums1 = {1, 2, 3, 0, 0, 0, 0, 0, 0}, nums2 = {2, 5, 6, 7};
+        int[] nums3 = {0}, nums4 = {1};
+        int[] nums5 = {4, 5, 6, 0, 0, 0}, nums6 = {1, 2, 3};
+
+
+        mergeSortedArray(nums1, 3, nums2, 4);
+        Util.printArray(nums1);
+//        Util.printArray(nums2);
+        mergeSortedArray(nums3, 0, nums4, 1);
+        Util.printArray(nums3);
+        mergeSortedArray(nums5, 3, nums6, 3);
+        Util.printArray(nums5);
+    }
 
 }
