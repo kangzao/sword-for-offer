@@ -9,29 +9,26 @@ import com.jep.github.swordForOffer.Util;
  */
 public class _283_MoveZeroes {
 
+    // 双指针法
+    public static void moveZeroes(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return;
+        }
+        int p = 0;//慢指针 确保慢指针以前的都不是0
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                Util.swap(nums, i, p++);
+            }
+            Util.printArray(nums);
+        }
 
-  public static void moveZeroes(int[] nums) {
-    if (nums == null || nums.length == 0) {
-      return;
+
     }
 
-    int insertPos = 0;
-    for (int num : nums) {
-      if (num != 0) {
-        nums[insertPos++] = num;
-      }
+    public static void main(String args[]) {
+        int array[] = {0, 1, 0, 3, 12};
+        moveZeroes(array);
+        Util.printArray(array);
     }
-    Util.printArray(nums);
-
-    while (insertPos < nums.length) {
-      nums[insertPos++] = 0;
-    }
-  }
-
-  public static void main(String args[]) {
-    int array[] = {0, 1, 0, 3, 12};
-    moveZeroes(array);
-    Util.printArray(array);
-  }
 
 }
