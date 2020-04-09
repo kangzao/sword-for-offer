@@ -2,6 +2,7 @@ package com.jep.github.leetcode;
 
 import com.jep.github.swordForOffer.Util;
 import java.util.ArrayDeque;
+import java.util.LinkedList;
 
 /*
  * @author: enping.jep
@@ -24,6 +25,8 @@ import java.util.ArrayDeque;
      1  3  -1 [-3  5  3] 6  7       5
      1  3  -1  -3 [5  3  6] 7       6
      1  3  -1  -3  5 [3  6  7]      7
+
+     https://leetcode-cn.com/problems/sliding-window-maximum/solution/shuang-xiang-dui-lie-jie-jue-hua-dong-chuang-kou-2/
 
  */
 public class _239_MaxSlidingWindow {
@@ -48,24 +51,55 @@ public class _239_MaxSlidingWindow {
     return array;
   }
 
-//  public static int[] maxSlidingWindow_optimize(int[] nums, int k) {
-//    int start = 0, end = 0;
-//    int[] result = new int[nums.length - k + 1];//存放结果的数组
-//    ArrayDeque<Integer> arrayDeque = new ArrayDeque();//单调递减队列
-//    for (int i = 0; i < nums.length; i++) {
-//      end++;
-//      //确保队列单调递减
-//      while (!arrayDeque.isEmpty() && nums[i] > arrayDeque.peekLast()) {
-//        arrayDeque.pollLast();
-//      }
-//      arrayDeque.offerLast(i);
-//      //判断队列中第一个元素是否在滑动窗口之外了
-//      if(){
-//
-//      }
-//
+
+  public static int[] maxSlidingWindow_optimize(int[] nums, int k) {
+    //头部存放最大值的索引，索引对应的值单调递减
+    LinkedList<Integer> linkedList = new LinkedList();
+    int[] result = new int[nums.length - k + 1];
+    for (int i = 0; i < nums.length; i++) {
+      //判断头部是否有效,如果无效，就把头部移除
+      if (!linkedList.isEmpty() && linkedList.peek() <= i - k) {
+        linkedList.poll();
+      }
+      //为了确保单调递减，如果数组中的元素大于队列尾部元素，则将尾部元素做出队处理(最大值肯定不在这些元素中，移除)，然后将新元素入队
+      while (!linkedList.isEmpty() && nums[linkedList.peekLast()] <= nums[i]) {
+        linkedList.pollLast();
+      }
+      linkedList.addLast(i);
+      //判断循环是否已经到达滑动窗口的边界，记录最大值
+      if (i + 1 >= k) {
+        result[i + 1 - k] = nums[linkedList.peek()];
+      }
+    }
+    return result;
+  }
+
+//  public int[] maxSlidingWindow(int[] nums, int k) {
+//    if (nums == null || nums.length < 2) {
+//      return nums;
 //    }
-//
+//    // 双向队列 保存当前窗口最大值的数组位置 保证队列中数组位置的数值按从大到小排序
+//    LinkedList<Integer> queue = new LinkedList();
+//    // 结果数组
+//    int[] result = new int[nums.length - k + 1];
+//    // 遍历nums数组
+//    for (int i = 0; i < nums.length; i++) {
+//      // 保证从大到小 如果前面数小则需要依次弹出，直至满足要求
+//      while (!queue.isEmpty() && nums[queue.peekLast()] <= nums[i]) {
+//        queue.pollLast();
+//      }
+//      // 添加当前值对应的数组下标
+//      queue.addLast(i);
+//      // 判断当前队列中队首的值是否有效
+//      if (queue.peek() <= i - k) {
+//        queue.poll();
+//      }
+//      // 当窗口长度为k时 保存当前窗口中最大值
+//      if (i + 1 >= k) {
+//        result[i + 1 - k] = nums[queue.peek()];
+//      }
+//    }
+//    return result;
 //  }
 
 
@@ -73,5 +107,6 @@ public class _239_MaxSlidingWindow {
     int[] array = {1, 3, -1, -3, 5, 3, 6, 7};
     int[] result = maxSlidingWindow(array, 3);
     Util.printArray(result);
+    Util.printArray(maxSlidingWindow_optimize(array, 3));
   }
 }
