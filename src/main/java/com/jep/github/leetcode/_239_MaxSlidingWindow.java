@@ -54,7 +54,7 @@ public class _239_MaxSlidingWindow {
 
   public static int[] maxSlidingWindow_optimize(int[] nums, int k) {
     //头部存放最大值的索引，索引对应的值单调递减
-    LinkedList<Integer> linkedList = new LinkedList();
+    LinkedList<Integer> linkedList = new LinkedList<>();
     int[] result = new int[nums.length - k + 1];
     for (int i = 0; i < nums.length; i++) {
       //判断头部是否有效,如果无效，就把头部移除
