@@ -90,7 +90,9 @@ public class _234_IsPalindrome {
     ListNode node3 = new ListNode(3);
     ListNode node4 = new ListNode(2);
     ListNode node5 = new ListNode(1);
-//    ListNode node6 = new ListNode(6);
+    ListNode node6 = new ListNode(6);
+    node6.next = new ListNode(7);
+
     node1.next = node2;
     node2.next = node3;
     node3.next = node4;
@@ -100,6 +102,7 @@ public class _234_IsPalindrome {
     reverse(node1).printNode();
 
     System.out.println(isPalindrome_O1((node1)));
+    System.out.println(isPalindrome_O1((node6)));
 
   }
 
