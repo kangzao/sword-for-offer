@@ -20,7 +20,7 @@ public class _215_FindKthLargest {
     int left = 0;
     int right = len - 1;
     while (true) {
-      int index = partition(nums, left, right);
+      int index = randomPartition(nums, left, right);
       if (index < target) {
         left = index + 1;
       } else if (index > target) {
@@ -32,7 +32,7 @@ public class _215_FindKthLargest {
   }
 
 
-  public int randomPartition(int[] nums, int left, int right) {
+  public static int randomPartition(int[] nums, int left, int right) {
     int i = random.nextInt(right - left + 1) + left;
     swap(nums, i, left);
     return partition(nums, left, right);
