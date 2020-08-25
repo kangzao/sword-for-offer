@@ -2,6 +2,7 @@ package com.jep.github.algorithm;
 
 import com.jep.github.swordForOffer.Util;
 
+
 /**
  * author jiangenping
  * 2020/8/24 下午10:45
@@ -12,27 +13,25 @@ import com.jep.github.swordForOffer.Util;
  * 5. 将新元素插入到该位置后
  * 6. 重复步骤2~5
  */
-
 public class InsertionSort {
 
-    public static void insertionSort(int[] array) {
-        for (int i = 1; i < array.length; i++) {
-            int tmp = array[i];
-            for (int j = i; j >= 0; j--) {
-                if (j > 0 && array[j - 1] > tmp) {
-                    array[j] = array[j - 1];
-                } else {
-                    array[j] = tmp;
-                    break;
-                }
-            }
+  public static void insertionSort(int[] array) {
+    for (int i = 1; i < array.length; i++) {
+      int tmp = array[i];
+      for (int j = i; j >= 0; j--) {
+        if (j - 1 >= 0 && array[j - 1] > tmp) {
+          array[j] = array[j - 1];
+        } else {
+          array[j] = tmp;
+          break;
         }
-
+      }
     }
+  }
 
-    public static void main(String[] args) {
-        int[] array = new int[]{5, 8, 6, 3, 9, 2, 1, 7};
-        insertionSort(array);
-        Util.printArray(array);
-    }
+  public static void main(String[] args) {
+    int[] array = new int[]{5, 8, 6, 3, 9, 2, 1, 7};
+    insertionSort(array);
+    Util.printArray(array);
+  }
 }
