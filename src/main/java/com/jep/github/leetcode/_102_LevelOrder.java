@@ -29,11 +29,11 @@ public class _102_LevelOrder {
     Queue<TreeNode> queue = new LinkedList<>();
 
     queue.offer(root);
-
+    //循环每一层
     while (queue.size() > 0) {
       int levelNodes = queue.size();
       List<Integer> subList = new ArrayList<>();
-      //循环每一层
+      //循环每一层的节点
       for (int i = 0; i < levelNodes; i++) {
         if (queue.peek().left != null) {
           queue.offer(queue.peek().left);
@@ -55,8 +55,8 @@ public class _102_LevelOrder {
              3
             / \
            9   20
-          /     \
-         15      7
+               /\
+              15 7
      */
     TreeNode treeNode3 = new TreeNode(15);
     TreeNode treeNode4 = new TreeNode(7);
