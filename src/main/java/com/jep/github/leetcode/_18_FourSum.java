@@ -21,8 +21,8 @@ public class _18_FourSum {
       if (n1 > 0 && n1 > target) {
         break;
       }
-      //防止重复
-      if (i >= 1 && nums[i - 1] == n1) {
+      //防止重复,当前数字和前一个数字相同则跳出当前循环
+      if (i > 0 && nums[i - 1] == n1) {
         continue;
       }
 
@@ -33,7 +33,8 @@ public class _18_FourSum {
         if (n2 > 0 && n2 + n1 > target) {
           break;
         }
-        if (j >= 1 && nums[j - 1] == nums[j]) {
+        //这里容易写成j>1，那么0, 0, 0, 0, 0, 0和target=0会没有结果
+        if (j > i + 1 && nums[j - 1] == nums[j]) {
           continue;
         }
         int left = j + 1;
@@ -63,8 +64,11 @@ public class _18_FourSum {
   }
 
   public static void main(String args[]) {
-    int[] array = {1, 0, -1, 0, -2, 2};
-    System.out.println(fourSum(array, 0));
+//    int[] array = {1, 0, -1, 0, -2, 2};
+//    System.out.println(fourSum(array, 0));
+
+    int[] array1 = {0, 0, 0, 0, 0, 0};
+    System.out.println(fourSum(array1, 0));
 
   }
 
