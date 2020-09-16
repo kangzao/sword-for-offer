@@ -35,7 +35,7 @@ public class _44_FindNthDigit {
       c = (long) (Math.pow(10, base - 1) + a);
       res = String.valueOf(c).charAt((int) b - 1);
     } else {
-      //如果恰好整除，走过两个数字之后前移一位
+      //如果恰好整除，走过两个数字之后前移一个数字
       c = (long) (Math.pow(10, base - 1) + a - 1);
       //这个数字的最后一位
       res = String.valueOf(c).charAt((int) base - 1);
