@@ -16,7 +16,7 @@ public class LazySimpleSingletonTest {
     System.out.println("end");
 //    Thread-0:com.jep.github.designpattern.LazySimpleSingleton@7c22ad4a
 //    Thread-1:com.jep.github.designpattern.LazySimpleSingleton@28a8fc97
-//    说明单例存在线程安全隐患
+//    说明单例存在线程安全隐患m
 
   }
 
