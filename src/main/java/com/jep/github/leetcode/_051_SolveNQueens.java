@@ -63,6 +63,4 @@ public class _051_SolveNQueens {
     }
     return true;
   }
-
-
 }
