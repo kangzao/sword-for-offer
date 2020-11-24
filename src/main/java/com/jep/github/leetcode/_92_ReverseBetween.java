@@ -13,7 +13,7 @@ public class _92_ReverseBetween {
     dummy.next = head;
     ListNode joinNode = dummy;
     int count = 1;
-    //从虚拟节点开始移动，从m开始就移动m个位置
+    //从虚拟节点开始移动，移动m个位置
     while (count != m) {
       joinNode = joinNode.next;
       count++;
