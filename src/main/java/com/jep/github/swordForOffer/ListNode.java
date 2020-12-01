@@ -26,5 +26,11 @@ public class ListNode {
     System.out.println(stringBuilder.substring(0, stringBuilder.length() - 2));
   }
 
+  @Override
+  public String toString() {
+    return val + "";
+  }
+
+
 }
 

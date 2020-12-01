@@ -14,7 +14,7 @@ import com.jep.github.swordForOffer.ListNode;
  * Example:
  * <p>
  * Given this linked list: 1->2->3->4->5
- * <p>
+ * <p>ø
  * For k = 2, you should return: 2->1->4->3->5
  * <p>
  * For k = 3, you should return: 3->2->1->4->5
