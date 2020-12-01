@@ -30,57 +30,57 @@ public class _025_ReverseKGroup {
   /**
    * 反转链表，返回新的头和尾
    */
-  private static ListNode[] reverse(ListNode begin, ListNode end) {
-    ListNode reverseTail = begin;
-    ListNode reverseHead = null;
-    while (reverseHead != end) {
-      ListNode next = begin.next;
-      begin.next = reverseHead;
-      reverseHead = begin;
-      begin = next;
+  private static ListNode[] reverse(ListNode head, ListNode tail) {
+
+    ListNode pre = null;
+    ListNode p = head;
+    while (pre != tail) {
+      ListNode next = p.next;
+      p.next = pre;
+      pre = p;
+      p = next;
     }
-    return new ListNode[]{reverseHead, reverseTail};
+
+    return new ListNode[]{pre, head};
   }
 
   public static ListNode reverseKGroup(ListNode head, int k) {
-    ListNode dummy = new ListNode(-1);
+    ListNode dummy = new ListNode();
     dummy.next = head;
-
-    //被翻转子链表前的节点
-    ListNode pre = dummy;
-
+    //被翻转子链表的前驱节点
+    ListNode prev = dummy;
     while (head != null) {
-      //子链表的最后一个节点
-      ListNode end = pre;
-      //走k步后停下来，如果长度不够K，则返回头结点
+      //end为子链表的尾节点
+      ListNode end = prev;
+      //end走K步
       for (int i = 0; i < k; i++) {
         end = end.next;
+        //节点数不足K个，直接返回
         if (end == null) {
           return dummy.next;
         }
       }
-
       //子链表的下一个节点
       ListNode next = end.next;
-      //翻转子链表
+      //翻转K个节点,head为待翻转链表的头结点
+      head = prev.next;
       ListNode[] listNodes = reverse(head, end);
-      //翻转后的子链表头部
+      //交换start和end的位置，因为子链表被翻转了
       head = listNodes[0];
-      //翻转后的子链表尾部
       end = listNodes[1];
 
       //连接前半部分
-      pre.next = head;
+      prev.next = head;
       //连接后半部分
       end.next = next;
 
-      pre = end;
+      //移动指针
+      prev = end;
       head = end.next;
-
-
     }
-
     return dummy.next;
+
+
   }
 
 
