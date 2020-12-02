@@ -12,15 +12,24 @@ public class _94_InorderTraversal {
 
   public static List<Integer> inorderTraversal(TreeNode root) {
     List<Integer> result = new ArrayList<>();
-    //根左右
+    inorder(root, result);
+    return result;
+  }
+
+  public static void inorder(TreeNode root, List result) {
+    if (root == null) {
+      return;
+    }
+    inorder(root.left, result);
     result.add(root.val);
-    inorderTraversal(root.left);
-    inorderTraversal(root.right);
-
-
+    inorder(root.right, result);
   }
 
   public static void main(String args[]) {
+    TreeNode root = new TreeNode(1);
+    root.right = new TreeNode(2);
+    root.right.left = new TreeNode(3);
+    System.out.println(inorderTraversal(root));
 
   }
 
