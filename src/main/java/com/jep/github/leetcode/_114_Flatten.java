@@ -9,6 +9,8 @@ import java.util.List;
  */
 public class _114_Flatten {
 
+
+  //最直观的方法，先前序遍历放到集合中再调整各节点关系
   public static void flatten(TreeNode root) {
     List<TreeNode> list = new ArrayList<>();
     preorderTraversal(root, list);
@@ -19,6 +21,26 @@ public class _114_Flatten {
       tmp.right = list.get(i);
       tmp.left = null;
     }
+
+  }
+
+
+  public static void flatten1(TreeNode root) {
+    if (root == null) {
+      return;
+    }
+    flatten(root.left);
+    flatten(root.right);
+
+    TreeNode left = root.left;
+    TreeNode right = root.right;
+    root.left = null;
+    root.right = left;
+    TreeNode p = root;
+    while (p.right != null) {
+      p = p.right;
+    }
+    p.right = right;
 
   }
 
