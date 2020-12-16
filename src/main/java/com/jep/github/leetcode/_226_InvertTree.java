@@ -9,7 +9,7 @@ public class _226_InvertTree {
 
   public static TreeNode invertTree(TreeNode root) {
     if (root == null) {
-      return root;
+      return null;
     }
     TreeNode tmp = root.left;
     root.left = root.right;
