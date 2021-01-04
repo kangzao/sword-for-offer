@@ -17,11 +17,6 @@ public class _701_InsertIntoBST {
     if (root == null) {
       return new TreeNode(val);
     }
-
-
-
-
-
     //插入右子树
     if (val > root.val) {
       root.right = insertIntoBST(root.right, val);
