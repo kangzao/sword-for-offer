@@ -42,8 +42,6 @@ public class _55_CanJump {
       }
     }
     return dp[length - 1];
-
-
   }
 
 }
