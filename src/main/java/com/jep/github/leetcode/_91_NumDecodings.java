@@ -18,7 +18,7 @@ public class _91_NumDecodings {
     dp[1] = dp[0] = 1;
     //第i-1个当做一个字符，则dp[i] = dp[i-1]
     for (int i = 2; i <= s.length(); i++) {
-      if (array[i - 1] > '0' && array[i - 1] < '9') {
+      if (array[i - 1] > '0' && array[i - 1] <= '9') {
         dp[i] = dp[i - 1];
       }
 
