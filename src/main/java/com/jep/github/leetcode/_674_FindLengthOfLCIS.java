@@ -24,7 +24,7 @@ package com.jep.github.leetcode;
 public class _674_FindLengthOfLCIS {
 
   public int findLengthOfLCIS(int[] nums) {
-
+    return 0;
   }
 
 }
