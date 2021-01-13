@@ -24,7 +24,29 @@ package com.jep.github.leetcode;
 public class _674_FindLengthOfLCIS {
 
   public int findLengthOfLCIS(int[] nums) {
-    return 0;
+    //前i个数字的最长连续递增 f(i) = f(i-1) && nums[i] > nums[i-1]
+    if (nums == null || nums.length == 0) {
+      return 0;
+    }
+    int[] dp = new int[nums.length];
+    dp[0] = 1; //以nums[0]结尾
+    int res = dp[0];//可能存在只有一个元素的情况，要给最终结果一个默认值
+    for (int i = 1; i < nums.length; i++) {
+      if (nums[i] > nums[i - 1]) {
+        dp[i] = dp[i - 1] + 1;
+      } else {
+        dp[i] = 1;
+      }
+      res = Math.max(dp[i], res);
+    }
+    return res;
+  }
+
+  public static void main(String args[]) {
+    int[] array = {1};
+    _674_FindLengthOfLCIS solution = new _674_FindLengthOfLCIS();
+    System.out.println(solution.findLengthOfLCIS(array));
+
   }
 
 }
