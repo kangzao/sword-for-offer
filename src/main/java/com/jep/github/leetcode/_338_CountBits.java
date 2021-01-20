@@ -37,15 +37,18 @@ public class _338_CountBits {
    *
    *
    * P(x)=P(x/2)+(x mod 2)
+   *
+   * 取模优化：x % 2^N == x & (2^N - 1)
    */
 
   public int[] countBits(int num) {
     //f[i] = f[i - 1] >> 2 + (i mod 2)  i mod 2表示2的二进制中的最后一位
     int[] nums = new int[num + 1];
     nums[0] = 0;
-    for (int i = 0; i <= num; i++) {
-      nums[i]
+    for (int i = 1; i <= num; i++) {
+      nums[i] = nums[i >> 1] + (i & 1);
     }
+    return nums;
 
   }
 
