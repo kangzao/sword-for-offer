@@ -91,8 +91,10 @@ public class _265_MinCostII {
   }
 
   public static void main(String args[]) {
+    int[][] costs = {{14, 2, 11}, {11, 14, 5}, {14, 3, 10}};
+    _265_MinCostII solution = new _265_MinCostII();
+    solution.minCostII(costs);
 
-    System.out.println(100 ^ 100);
 
   }
 
