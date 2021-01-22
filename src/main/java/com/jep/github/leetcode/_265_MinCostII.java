@@ -94,8 +94,6 @@ public class _265_MinCostII {
     int[][] costs = {{14, 2, 11}, {11, 14, 5}, {14, 3, 10}};
     _265_MinCostII solution = new _265_MinCostII();
     solution.minCostII(costs);
-
-
   }
 
 }
