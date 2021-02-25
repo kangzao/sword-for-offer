@@ -12,7 +12,7 @@ public class _354_MaxEnvelopes {
   public int maxEnvelopes(int[][] envelopes) {
     //状态转移公式
     //dp[i] = Math.max(dp[i],dp[j]+1) 其中，j<i envelopes[j] < envelopes[i]
-    //信封的顺序可以调整,所以按一定顺序组合后，使用最长子序列算法(LIS)运算即可,先按照第一维升序(长款都必须满足内层的比外层的小)，然后使用LIS
+    //信封的顺序可以调整,所以按一定顺序组合后，使用最长子序列算法(LIS)运算即可,先按照第一维升序(长宽都必须满足内层的比外层的小)，然后使用LIS
     Arrays.sort(envelopes, new Comparator<int[]>() {
       public int compare(int[] o1, int[] o2) {
         return o1[0] - o2[0];
