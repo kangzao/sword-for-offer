@@ -65,7 +65,6 @@ public class _132_MinCut {
     _132_MinCut minCut = new _132_MinCut();
     String s = "aab";
     System.out.println(minCut.minCut(s));
-
   }
 
 }
