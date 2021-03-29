@@ -85,7 +85,7 @@ public class _025_ReverseKGroup {
 
   //左闭右开区间,返回翻转后的头节点
   public static ListNode reverse_recursion(ListNode head, ListNode tail) {
-    ListNode pre = null;
+    ListNode pre = new ListNode(Integer.MIN_VALUE);
     ListNode next = null;
     while (head != tail) {
       next = head.next;
@@ -137,9 +137,12 @@ public class _025_ReverseKGroup {
     node3.next = node4;
     node4.next = node5;
     node5.next = node6;
-//    node1.printNode();
+    node1.printNode();
 //    reverse(node1, node6);
-    reverseKGroup_recursion(node1, 2).printNode();
+//    reverseKGroup_recursion(node1, 2).printNode();
+//    node1.printNode();
+
+//    reverse_recursion(node1, node4).printNode();
 //    node1.printNode();
 //    reset(node1);
 //    node1.printNode();
