@@ -83,6 +83,47 @@ public class _025_ReverseKGroup {
 
   }
 
+  //左闭右开区间,返回翻转后的头节点
+  public static ListNode reverse_recursion(ListNode head, ListNode tail) {
+    ListNode pre = null;
+    ListNode next = null;
+    while (head != tail) {
+      next = head.next;
+      head.next = pre;
+      pre = head;
+      head = next;
+    }
+    return pre;
+
+  }
+
+
+  public static ListNode reverseKGroup_recursion(ListNode head, int k) {
+    //1、走到第k个元素
+    ListNode tail = head;
+    //需要注意边界，因为k可能等于1，需要多移动一位，否则需要单独处理边界问题
+    for (int i = 0; i < k; i++) {
+      if (tail == null) {
+        return head;
+      }
+      tail = tail.next;
+    }
+
+    //2、翻转这k个元素
+    ListNode newHead = reverse_recursion(head, tail);
+    head.printNode();
+
+    //3、翻转第二组k个元素后和第一组相连
+    head.next = reverseKGroup_recursion(tail, k);
+
+    head.printNode();
+    return newHead;
+  }
+
+  public static void reset(ListNode listNode) {
+    listNode.val = Integer.MAX_VALUE;
+    listNode.next = new ListNode(Integer.MIN_VALUE);
+  }
 
   public static void main(String[] args) {
     ListNode node1 = new ListNode(1);
@@ -98,7 +139,9 @@ public class _025_ReverseKGroup {
     node5.next = node6;
 //    node1.printNode();
 //    reverse(node1, node6);
-    reverseKGroup(node1, 2).printNode();
-
+    reverseKGroup_recursion(node1, 2).printNode();
+//    node1.printNode();
+//    reset(node1);
+//    node1.printNode();
   }
 }
