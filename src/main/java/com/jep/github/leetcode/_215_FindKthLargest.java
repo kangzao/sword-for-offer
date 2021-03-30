@@ -4,6 +4,7 @@ import static com.jep.github.swordForOffer.Util.swap;
 
 import com.jep.github.swordForOffer.Util;
 import java.util.Arrays;
+import java.util.PriorityQueue;
 import java.util.Random;
 
 /*
@@ -13,6 +14,20 @@ import java.util.Random;
 public class _215_FindKthLargest {
 
   private static Random random = new Random();
+
+  public static int findKthLargest_heap(int[] nums, int k) {
+    PriorityQueue<Integer> pqNums = new PriorityQueue<>();
+    int n = nums.length;
+    for (int i = 0; i < n; i++) {
+      pqNums.offer(nums[i]);
+      if (pqNums.size() > k) {
+        //最小堆，把堆顶小于第k大元素的数字移除
+        pqNums.poll();
+      }
+    }
+    return pqNums.peek();
+  }
+
 
   public static int findKthLargest(int[] nums, int k) {
     int len = nums.length;
@@ -67,7 +82,7 @@ public class _215_FindKthLargest {
 
     int[] nums = {3, 2, 3, 1, 2, 4, 5, 5, 6};
     int k = 4;
-    System.out.println(findKthLargest(nums, k));
+    System.out.println(findKthLargest_heap(nums, k));
 //    System.out.println(select(nums, 4));
 
   }
