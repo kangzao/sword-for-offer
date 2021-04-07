@@ -53,7 +53,7 @@ public class _22_KthNodeFromEnd {
 
   public static void main(String[] args) {
     ListNode root = new ListNode();
-    root.val = 1;ø
+    root.val = 1;
     root.next = new ListNode();
     root.next.val = 2;
     root.next.next = new ListNode();
