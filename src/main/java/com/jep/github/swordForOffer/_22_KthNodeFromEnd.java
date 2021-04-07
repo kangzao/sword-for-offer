@@ -36,9 +36,24 @@ public class _22_KthNodeFromEnd {
     return slow;
   }
 
+
+  public static ListNode getKthFromEnd_loop(ListNode head, int k) {
+    ListNode former = head, latter = head;
+    for (int i = 0; i < k; i++) {
+      System.out.println(i);
+      former = former.next;
+    }
+    while (former != null) {
+      former = former.next;
+      latter = latter.next;
+    }
+    return latter;
+  }
+
+
   public static void main(String[] args) {
     ListNode root = new ListNode();
-    root.val = 1;
+    root.val = 1;ø
     root.next = new ListNode();
     root.next.val = 2;
     root.next.next = new ListNode();
@@ -48,7 +63,7 @@ public class _22_KthNodeFromEnd {
     root.next.next.next.next = new ListNode();
     root.next.next.next.next.val = 5;
     root.printNode();
-    ListNode node = kthNodeFromEnd(root, 2);
+    ListNode node = getKthFromEnd_loop(root, 2);
     node.printNode();
 
 
