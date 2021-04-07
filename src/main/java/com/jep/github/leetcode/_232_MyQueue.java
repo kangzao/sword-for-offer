@@ -38,7 +38,7 @@ public class _232_MyQueue {
   }
 
   /**
-   * Get the front element.
+   * Get the front element.ø
    */
   public int peek() {
     if (s2.empty()) {
