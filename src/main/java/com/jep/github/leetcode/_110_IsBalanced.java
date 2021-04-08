@@ -14,7 +14,6 @@ public class _110_IsBalanced {
     int rightHeight = height(root.right);
     return Math.abs(leftHeight - rightHeight) <= 1 && isBalanced(root.left) && isBalanced(
         root.right);
-
   }
 
   /**
