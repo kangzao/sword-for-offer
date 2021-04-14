@@ -26,6 +26,5 @@ public class _202_IsHappy {
       n = n / 10;
     }
     return result;
-
   }
 }
