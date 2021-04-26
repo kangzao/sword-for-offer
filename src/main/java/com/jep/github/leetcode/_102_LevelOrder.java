@@ -20,32 +20,30 @@ public class _102_LevelOrder {
 
   public static List<List<Integer>> levelOrder(TreeNode root) {
 
-    List<List<Integer>> list = new ArrayList<>();
-
+    List<List<Integer>> res = new ArrayList<List<Integer>>();
     if (root == null) {
-      return list;
+      return res;
     }
 
-    Queue<TreeNode> queue = new LinkedList<>();
-
+    Queue<TreeNode> queue = new LinkedList<TreeNode>();
     queue.offer(root);
-    //循环每一层
-    while (queue.size() > 0) {
-      int levelNodes = queue.size();
-      List<Integer> subList = new ArrayList<>();
-      //循环每一层的节点
-      for (int i = 0; i < levelNodes; i++) {
-        if (queue.peek().left != null) {
-          queue.offer(queue.peek().left);
+    while (!queue.isEmpty()) {
+      List<Integer> list = new ArrayList();
+      int size = queue.size();
+      for (int i = 0; i < size; i++) {
+        TreeNode node = queue.poll();
+        list.add(node.val);
+        if (node.left != null) {
+          queue.offer(node.left);
         }
-        if (queue.peek().right != null) {
-          queue.offer(queue.peek().right);
+        if (node.right != null) {
+          queue.offer(node.right);
         }
-        subList.add(queue.poll().val);
       }
-      list.add(subList);
+      res.add(list);
     }
-    return list;
+
+    return res;
 
   }
 
