@@ -22,7 +22,33 @@ import com.jep.github.swordForOffer.ListNode;
 public class _23_MergeKLists {
 
   public ListNode mergeKLists(ListNode[] lists) {
-    return null;
+    ListNode ans = null;
+    for (int i = 0; i < lists.length; i++) {
+      ans = mergeTwoLists(ans, lists[i]);
+    }
+    return ans;
+  }
+
+
+  public ListNode mergeTwoLists(ListNode a, ListNode b) {
+    if (a == null || b == null) {
+      return a == null ? b : a;
+    }
+    ListNode head = new ListNode(0);
+    ListNode nodeA = a, nodeB = b, tail = head;
+
+    while (nodeA != null && nodeB != null) {
+      if (nodeA.val < nodeB.val) {
+        tail.next = nodeA;
+        nodeA = nodeA.next;
+      } else {
+        tail.next = nodeB;
+        nodeB = nodeB.next;
+      }
+      tail = tail.next;
+    }
+    tail.next = (nodeA == null ? nodeB : nodeA);
+    return head.next;
   }
 
 }
