@@ -27,6 +27,7 @@ public class _113_PathSum {
       return;
     }
     targetSum -= root.val;
+    System.out.println("targetSum =="+targetSum);
     path.offerLast(root.val);
     //如果递归到叶子节点
     if (root.left == null && root.right == null && targetSum == 0) {
