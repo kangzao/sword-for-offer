@@ -5,39 +5,34 @@ import com.jep.github.swordForOffer.ListNode;
 /*
  * @author: enping.jep
  * @create: 2020-11-24 11:08 AM
+ *
+ * 输入：head = [1,2,3,4,5], left = 2, right = 4
+   输出：[1,4,3,2,5]
  */
 public class _92_ReverseBetween {
 
   public static ListNode reverseBetween(ListNode head, int m, int n) {
     ListNode dummy = new ListNode(-1);
     dummy.next = head;
-    ListNode joinNode = dummy;
-    int count = 1;
-    //从虚拟节点开始移动，移动m个位置
-    while (count != m) {
-      joinNode = joinNode.next;
-      count++;
+    ListNode pre = dummy;
+    //pre表示被翻转节点的前一个节点
+    for (int i = 0; i < m - 1; i++) {
+      pre = pre.next;
+    }
+    ListNode cur = pre.next;
+    for (int i = 0; i < n - m; i++) {
+      ListNode next = cur.next;
+      cur.next = next.next;
+      next.next = pre.next;
+      pre.next = next;
+      pre.printNode();
     }
 
-    joinNode.next = reverse(joinNode.next, n - m + 1);
     return dummy.next;
+
+
   }
 
-  //反转链表前N个元素
-  private static ListNode reverse(ListNode head, int n) {
-    ListNode reverseLast = head;//反转后的头结点
-    ListNode dummy = null;//虚拟节点
-    while (head != null && n != 0) {
-      ListNode next = head.next;
-      head.next = dummy;
-      dummy = head;
-      head = next;
-      n--;
-    }
-    //链表分成两部分，将反转的部分和未反转的部分连接起来
-    reverseLast.next = head;
-    return dummy;
-  }
 
   public static void main(String args[]) {
     ListNode node1 = new ListNode(1);
