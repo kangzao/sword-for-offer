@@ -25,7 +25,6 @@ public class _92_ReverseBetween {
       cur.next = next.next;
       next.next = pre.next;
       pre.next = next;
-      pre.printNode();
     }
 
     return dummy.next;
