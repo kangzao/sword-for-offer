@@ -22,6 +22,7 @@ public class _03_LengthOfLongestSubstring {
       char c = s.charAt(i);
       if (map.containsKey(c)) {
         //移动滑动窗口
+        //比如：abb  start会移动到最后一个字母上去，因为有重复，所以要重新指定start的位置
         start = Math.max(start, map.get(c) + 1);
       }
       //记录滑动窗口的起始位置
