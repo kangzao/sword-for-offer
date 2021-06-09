@@ -31,56 +31,56 @@ public class _025_ReverseKGroup {
    * 反转链表，返回新的头和尾
    */
   private static ListNode[] reverse(ListNode head, ListNode tail) {
-
+    //pre是head之前的节点
     ListNode pre = null;
-    ListNode p = head;
+    ListNode dummy = head;
+    //pre移动到tail的位置，则循环结束
     while (pre != tail) {
-      ListNode next = p.next;
-      p.next = pre;
-      pre = p;
-      p = next;
+      ListNode next = head.next;
+      head.next = pre;
+      pre = head;
+      head = next;
     }
+    //此时pre是头结点，尾节点是dummy
+    return new ListNode[]{tail, dummy};
 
-    return new ListNode[]{pre, head};
+
   }
 
   public static ListNode reverseKGroup(ListNode head, int k) {
-    ListNode dummy = new ListNode();
-    dummy.next = head;
-    //被翻转子链表的前驱节点
-    ListNode prev = dummy;
+    //hair指针不动，用来记录链表的头结点位置
+    ListNode hair = new ListNode(0);
+    hair.next = head;
+    //tail指针移动k个位置
+    ListNode tail = hair;
+    //pre指针记录被移动那一组元素的前驱节点
+    ListNode pre = hair;
     while (head != null) {
-      //end为子链表的尾节点
-      ListNode end = prev;
-      //end走K步
+      //tail指针指向要反转链表的最后一个节点
       for (int i = 0; i < k; i++) {
-        end = end.next;
-        //节点数不足K个，直接返回
-        if (end == null) {
-          return dummy.next;
+        tail = tail.next;
+        //长度不够直接返回
+        if (tail == null) {
+          return hair.next;
         }
+
       }
-      //子链表的下一个节点
-      ListNode next = end.next;
-      //翻转K个节点,head为待翻转链表的头结点
-      head = prev.next;
-      ListNode[] listNodes = reverse(head, end);
-      //交换start和end的位置，因为子链表被翻转了
+      //被翻转的那组节点之后的节点
+      ListNode next = tail.next;
+      //反转从cur到tail之间的节点
+      ListNode[] listNodes = reverse(head, tail);
       head = listNodes[0];
-      end = listNodes[1];
+      tail = listNodes[1];
 
-      //连接前半部分
-      prev.next = head;
-      //连接后半部分
-      end.next = next;
+      //一组链表反转完成后，需要重新拉链
+      pre.next = head;
+      tail.next = next;
 
-      //移动指针
-      prev = end;
-      head = end.next;
+      //移动pre和head，pre始终指向一组节点的前驱节点，head指向被移动那组节点的头结点
+      pre = tail;
+      head = tail.next;
     }
-    return dummy.next;
-
-
+    return hair.next;
   }
 
   //左闭右开区间,返回翻转后的头节点
