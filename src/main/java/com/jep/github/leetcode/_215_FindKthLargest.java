@@ -13,77 +13,61 @@ import java.util.Random;
  */
 public class _215_FindKthLargest {
 
-  private static Random random = new Random();
+  Random random = new Random();
 
-  public static int findKthLargest_heap(int[] nums, int k) {
-    PriorityQueue<Integer> pqNums = new PriorityQueue<>();
-    int n = nums.length;
-    for (int i = 0; i < n; i++) {
-      pqNums.offer(nums[i]);
-      if (pqNums.size() > k) {
-        //最小堆，把堆顶小于第k大元素的数字移除
-        pqNums.poll();
-      }
-    }
-    return pqNums.peek();
+
+  public int findKthLargest(int[] nums, int k) {
+    //nums.length - k 第k大的元素索引
+    return quickSort(nums, 0, nums.length - 1, nums.length - k);
   }
 
+  //
+  private int quickSort(int[] a, int left, int right, int index) {
+    int q = randomPartitiom(a, left, right);
+    if (q == index) {
+      return a[q];
 
-  public static int findKthLargest(int[] nums, int k) {
-    int len = nums.length;
-    int target = len - k;
-    int left = 0;
-    int right = len - 1;
-    while (true) {
-      int index = randomPartition(nums, left, right);
-      if (index < target) {
-        left = index + 1;
-      } else if (index > target) {
-        right = index - 1;
-      } else {
-        return nums[index];
-      }
+    } else {
+      return q < index ? quickSort(a, q + 1, right, index) : quickSort(a, left, q - 1, index);
     }
   }
 
-
-  public static int randomPartition(int[] nums, int left, int right) {
+  private int randomPartitiom(int[] a, int left, int right) {
+    // 1. 随机数范围: [0, r-l+1) 同时加l, 则是 [l, r+1) = [l, r] 也就是在这个[l,r] 中随机选一个索引出来
     int i = random.nextInt(right - left + 1) + left;
-    swap(nums, i, left);
-    return partition(nums, left, right);
+    // 2. 交换nums[i]， nums[r], 也就是将随机数先放在[l,r]最右边nums[r]上
+    swap(a, i, right);
+    return partition(a, left, right);
   }
 
-  /**
-   * 在数组 nums 的子区间 [left, right] 执行 partition 操作，返回 nums[left] 排序以后应该在的位置 在遍历过程中保持循环不变量的语义 1、[left +
-   * 1, j] < nums[left] 2、(j, i] >= nums[left]
-   */
-  public static int partition(int[] nums, int left, int right) {
-
-    // 在区间随机选择一个元素作为标定点
-    if (right > left) {
-      int randomIndex = left + 1 + random.nextInt(right - left);
-      swap(nums, left, randomIndex);
-    }
-
-    int pivot = nums[left];
-    int j = left;
-    for (int i = left + 1; i <= right; i++) {
-      if (nums[i] < pivot) {
-        j++;
-        swap(nums, j, i);
+  // 本质是构建这样一种序列：[小 小 小 i 大 大 大 j 待比较 待比较 待比较 基准]
+  private int partition(int[] a, int left, int right) {
+    int x = a[right];
+    int i = left - 1;
+    // 这个for循环操作就是将小于 x 的数都往[i, j]的左边区间设置，从而实现存在[l, i]区间,使得对应数值都 小于 x
+    for (int j = left; j < right; j++) {
+      if (a[j] < x) {
+        swap(a, ++i, j);
       }
     }
-    swap(nums, left, j);
-    return j;
+    swap(a, i + 1, right);
+    return i + 1;
+  }
+
+  private void swap(int[] nums, int i, int j) {
+    int tmp = nums[i];
+    nums[i] = nums[j];
+    nums[j] = tmp;
   }
 
 
   public static void main(String args[]) {
 
-    int[] nums = {3, 2, 3, 1, 2, 4, 5, 5, 6};
+    int[] nums = {2, 1, 5, 0, 4, 6, 3};
     int k = 4;
-    System.out.println(findKthLargest_heap(nums, k));
+//    System.out.println(findKthLargest_heap(nums, k));
 //    System.out.println(select(nums, 4));
+//    partition(nums, 0, nums.length - 1);
 
   }
 }
