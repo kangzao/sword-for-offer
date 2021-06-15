@@ -6,21 +6,18 @@ package com.jep.github.leetcode;
  */
 public class _509_Fib {
 
-  public int fib(int N) {
-    if (N < 1) {
-      return 0;
+  public int fib(int n) {
+    if (n < 2) {
+      return n;
     }
-    if (N == 1 || N == 2) {
-      return 1;
+    int hair = 0, head = 1, curr = 0;
+    for (int i = 2; i <= n; i++) {
+      curr = hair + head;
+      hair = head;
+      head = curr;
     }
-    int pre = 1, curr = 1;
-    int sum = 0;
-    for (int i = 3; i <= N; i++) {
-      sum = pre + curr;
-      pre = curr;
-      curr = sum;
-    }
-    return sum;
+    return curr;
+
   }
 
 }
