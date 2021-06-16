@@ -26,7 +26,7 @@ public class _121_MaxProfit {
     //动态规划
     public int maxProfit_dp(int[] prices) {
         int[][] dp = new int[prices.length][2];
-        //状态转移方程
+        //状态转移方程--
         // dp[i][0] = Math.max(dp[i-1][0],dp[i-1][1] + prices[i]) 第i天没有持股
         // dp[i][1] = Math.max(dp[i-1][1],-prices[i]) 第i天持股，由于只能交易一次，买入没有状态变化，既然买入了，则利润为-prices[i]
         // 最终要的结果是dp[prices.length-1][0]
