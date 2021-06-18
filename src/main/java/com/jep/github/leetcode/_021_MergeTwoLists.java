@@ -28,22 +28,32 @@ public class _021_MergeTwoLists {
   }
 
   public static ListNode merge(ListNode l1, ListNode l2) {
-    ListNode dummy = new ListNode();
+    if (l1 == null) {
+      return l2;
+    }
+    if (l2 == null) {
+      return l1;
+    }
+    ListNode hair = new ListNode(-1);
+    //prev指向被排好序的尾节点
+    ListNode prev = hair;
 
-    ListNode newHead = dummy;
-    while (l1 != null || l2 != null) {
-      if (l2 == null || (l1 != null && l1.val < l2.val)) {
-        newHead.next = l1;
-        newHead = l1;
+    while (l1 != null && l2 != null) {
+      if (l1.val <= l2.val) {
+        prev.next = l1;
+        //l1已经排好序，则向后移动一位
         l1 = l1.next;
       } else {
-        newHead.next = l2;
-        newHead = l2;
+        prev.next = l2;
         l2 = l2.next;
       }
-
+      prev = prev.next;
     }
-    return dummy.next;
+    //如果还有节点没有被遍历完
+    prev.next = l1 != null ? l1 : l2;
+    return hair.next;
+
+
   }
 
   public static void main(String args[]) {

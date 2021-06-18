@@ -19,6 +19,10 @@ public class _160_GetIntersectionNode {
      * pA:1->2->3->4->5->6->null->9->5->6->null
      * pB:9->5->6->null->1->2->3->4->5->6->null
      */
+    //设链表headA的长度是A 链表headB的长度是B  如果相交则公共部分为C
+    //a到公共入口的距离是A - C b到公共入口的距离是B - C
+    //a先遍历完headA走过的距离是A，然后从headB走B-C步到达链表交点  b先遍历完headB走过的距离B，然后从headA走A-C步到达交点
+    //A + (B - C) = B + (A - C) 如果没有相交，说明C == 0，a和b走完了两个链表都指向null，如果相交，C != 0
     if (headA == null || headB == null) {
       return null;
     }

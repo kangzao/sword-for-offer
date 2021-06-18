@@ -38,31 +38,25 @@ public class _20_ValidParentheses {
 
 
   public boolean isValid_1(String s) {
-    int n = s.length();
-    //长度必须是偶数
-    if (n % 2 == 1) {
+    if (s == null || s.length() % 2 == 1) {
       return false;
     }
+    Map<Character, Character> map = new HashMap<>();
+    map.put(')', '(');
+    map.put('}', '{');
+    map.put(']', '[');
 
-    Map<Character, Character> map = new HashMap() {{
-      put(')', '(');
-      put(']', '[');
-      put('}', '{');
-    }};
-    Deque<Character> deque = new LinkedList();
-    for (int i = 0; i < n; i++) {
-      char ch = s.charAt(i);
-
-      if (map.containsKey(ch)) {
-        //队列的头部和新元素能否匹配
-        if (deque.peek() != map.get(ch)) {
+    Deque<Character> deque = new LinkedList<>();
+    for (int i = 0; i < s.length(); i++) {
+      Character c = s.charAt(i);
+      //右半边括号需要判断是否闭合
+      if (map.containsKey(c)) {
+        if (deque.isEmpty() || deque.removeFirst() != map.get(c)) {
           return false;
         }
-        //如果匹配，则从队列里面移除
-        deque.pop();
       } else {
-        //放入队列
-        deque.push(ch);
+        //如果是左半边的符号，则放入栈顶
+        deque.addFirst(c);
       }
     }
     return deque.isEmpty();
