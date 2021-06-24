@@ -35,41 +35,32 @@ public class _234_IsPalindrome {
   }
 
   public static boolean isPalindrome_O1(ListNode head) {
-    if (head == null) {
-      return true;
-    }
-
-    // Find the end of first half and reverse second half.
-    ListNode firstHalfEnd = endOfFirstHalf(head);
-    ListNode secondHalfStart = reverse(firstHalfEnd.next);
-
-// Check whether or not there is a palindrome.
-    ListNode p1 = head;
-    ListNode p2 = secondHalfStart;
-    boolean result = true;
-    while (result && p2 != null) {
-      if (p1.val != p2.val) {
-        result = false;
-      }
-      p1 = p1.next;
-      p2 = p2.next;
-    }
-
-    // Restore the list and return the result.
-    firstHalfEnd.next = reverse(secondHalfStart);
-    return result;
-
-
-  }
-
-  public static ListNode endOfFirstHalf(ListNode head) {
     ListNode slow = head, fast = head;
-    while (fast.next != null && fast.next.next != null) {
-      slow = slow.next;
+    //fast走到尾部，slow走到中间
+    while (fast != null && fast.next != null) {
       fast = fast.next.next;
+      slow = slow.next;
     }
-    return slow;
+    // 1 2 2 1  fast指向null slow指向倒数第二个位置
+    // 1 2 3 2 1 奇数个节点，fast指向最后一个位置，slow指向3
+    if (fast != null) {
+      //奇数个节点，slow往后移动，因为3这个节点可以不用比较
+      slow = slow.next;
+    }
+    slow = reverse(slow);
+    fast = head;
+    while (slow != null) {
+      if (fast.val != slow.val) {
+        return false;
+      }
+      slow = slow.next;
+      fast = fast.next;
+    }
+    return true;
+
+
   }
+
 
   public static ListNode reverse(ListNode head) {
     ListNode pre = null;

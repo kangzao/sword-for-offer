@@ -9,20 +9,19 @@ import com.jep.github.swordForOffer.ListNode;
 public class _141_HasCycle {
 
   public static boolean hasCycle(ListNode head) {
-    if (head == null || head.next == null) {
+    if (head == null) {
       return false;
     }
-    ListNode slow = head;
-    ListNode fast = head.next;
+    ListNode fast = head, slow = head;
 
-    while (slow != fast) {
-      if (slow == null || fast == null) {
-        return false;
-      }
+    while (fast != null && fast.next != null) {
       slow = slow.next;
       fast = fast.next.next;
+      if (fast == slow) {
+        return true;
+      }
     }
-    return true;
+    return false;
   }
 
   public static void main(String args[]) {
