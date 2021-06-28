@@ -18,53 +18,86 @@ package com.jep.github.swordForOffer;
  **/
 public class _21_ReorderArray {
 
-    public static void reorderArray(int[] array) {
-        if (array == null || array.length < 2) {
-            return;
-        }
-        int left = 0, right = array.length - 1;
-        while (left < right) {
-            System.out.println(left + "--" + right);
-            //如果left经过奇数，则left继续移动
-            if (!isEven(array[left])) {
-                left++;
-            }
-            //如果right经过偶数，则right继续移动
-            if (isEven(array[right])) {
-                right--;
-            }
-            if (isEven(array[left]) && !isEven(array[right])) {
-                Util.swap(array, left, right);
-                left++;
-                right--;
-            }
-        }
 
+  public int[] exchange(int[] nums) {
+    int head = 0;
+    int tail = nums.length - 1;
+    while (head < tail) {
+      //如果是奇数就移动
+      while (isOdd(nums[head]) && head < tail) {
+        head++;
+      }
+      //如果是偶数就移动
+      while (!isOdd(nums[tail]) && head < tail) {
+        tail--;
+      }
+      swap(nums, head++, tail--);
+    }
+    return nums;
+
+  }
+
+  public boolean isOdd(int number) {
+    return number % 2 == 1;
+  }
+
+  public void swap(int[] nums, int a, int b) {
+    int tmp = nums[a];
+    nums[a] = nums[b];
+    nums[b] = tmp;
+  }
+
+
+  public static void reorderArray(int[] array) {
+    if (array == null || array.length < 2) {
+      return;
+    }
+    int left = 0, right = array.length - 1;
+    while (left < right) {
+      System.out.println(left + "--" + right);
+      //如果left经过奇数，则left继续移动
+      if (!isEven(array[left])) {
+        left++;
+      }
+      //如果right经过偶数，则right继续移动
+      if (isEven(array[right])) {
+        right--;
+      }
+      if (isEven(array[left]) && !isEven(array[right])) {
+        Util.swap(array, left, right);
+        left++;
+        right--;
+      }
     }
 
-    // 是否是偶数
-    public static boolean isEven(int number) {
-        return number % 2 == 0;
-    }
+  }
+
+  // 是否是偶数
+  public static boolean isEven(int number) {
+    return number % 2 == 0;
+  }
 
 
-    public static void main(String args[]) {
-        int[] array = {1, 2, 3, 4, 5, 6, 7};
-        reorderArray(array);
-        Util.printArray(array);
-        int[] array1 = {1, 3, 5, 7, 9};
-        reorderArray(array1);
-        Util.printArray(array1);
+  public static void main(String args[]) {
+//    int[] array = {1, 2, 3, 4, 5, 6, 7};
+//    reorderArray(array);
+//    Util.printArray(array);
+//    int[] array1 = {1, 3, 5, 7, 9};
+//    reorderArray(array1);
+//    Util.printArray(array1);
+//
+//    int numbers[] = {2, 4, 6, 1, 3, 5, 7};
+//    reorderArray(numbers);
+//    Util.printArray(numbers);
+//
+//    int numbers1[] = {2, 9, 9, 5, 3, 2, 9, 6, 0, 4};
+//    reorderArray(numbers1);
+//    Util.printArray(numbers1);
 
-        int numbers[] = {2, 4, 6, 1, 3, 5, 7};
-        reorderArray(numbers);
-        Util.printArray(numbers);
+    int[] array_1 = {1, 3, 5};
+    _21_ReorderArray reorderArray = new _21_ReorderArray();
+    reorderArray.exchange(array_1);
 
-
-        int numbers1[] = {2, 9, 9, 5, 3, 2, 9, 6, 0, 4};
-        reorderArray(numbers1);
-        Util.printArray(numbers1);
-
-    }
+  }
 
 }

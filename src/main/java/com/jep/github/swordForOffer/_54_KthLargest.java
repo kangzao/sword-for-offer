@@ -10,42 +10,31 @@ import java.util.List;
  */
 public class _54_KthLargest {
 
-  int res, k;
+  int n = 0, ans = -1;
 
-  //中序遍历左、根、右是递增数组,第K大的数字为该数字逆序后的第K个元素,然后直接返回即可。
   public int kthLargest(TreeNode root, int k) {
-    this.k = k;
+    n = k;
     dfs(root);
-    return res;
+    return ans;
+
   }
 
-  void dfs(TreeNode root) {
-
+  public void dfs(TreeNode root) {
     if (root == null) {
       return;
     }
-
-
     dfs(root.right);
-    if (k == 0) {
+    //根据二叉搜索树特性，从大往小遍历，第k大的元素就是第k个节点的值
+    if (--n == 0) {
+      ans = root.val;
       return;
-    }
-    System.out.println(root.val);
-    if (--k == 0) {
-
-      res = root.val;
     }
     dfs(root.left);
   }
 
 
   /**
-   *
-   *     5
-   *    / \
-   *   3   6
-   *  / \   \
-   * 2   4   7
+   * 5 / \ 3   6 / \   \ 2   4   7
    */
 
   public static void main(String args[]) {
@@ -65,7 +54,7 @@ public class _54_KthLargest {
 
     _54_KthLargest kthLargest = new _54_KthLargest();
     //节点经过顺序7 - 6 - 5
-    System.out.println("result ==" + kthLargest.kthLargest(root,3));
+    System.out.println("result ==" + kthLargest.kthLargest(root, 3));
   }
 
 

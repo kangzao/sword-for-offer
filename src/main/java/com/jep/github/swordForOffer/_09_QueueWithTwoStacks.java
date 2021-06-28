@@ -6,6 +6,8 @@ package com.jep.github.swordForOffer;
  * @create 2019-12-17 5:17 PM
  */
 
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Stack;
 
 //用两个栈实现队列
@@ -24,37 +26,32 @@ import java.util.Stack;
  */
 public class _09_QueueWithTwoStacks {
 
-  private Stack<Integer> stack1 = new Stack<>();
-  private Stack<Integer> stack2 = new Stack<>();
+  Deque<Integer> inStack, outStack;
 
-  public void push(int node) {
-    stack1.push(node);
+  public _09_QueueWithTwoStacks() {
+    inStack = new LinkedList();
+    outStack = new LinkedList();
   }
 
-  public int pop() {
-    if (stack2.empty()) {
-      while (!stack1.empty()) {
-        stack2.push(stack1.pop());
+  public void appendTail(int value) {
+    inStack.push(value);
+  }
+
+  public int deleteHead() {
+    in2out();
+    if (outStack.isEmpty()) {
+      return -1;
+    }
+    return outStack.pop();
+
+  }
+
+  public void in2out() {
+    if (outStack.isEmpty()) {
+      while (!inStack.isEmpty()) {
+        outStack.push(inStack.pop());
       }
     }
-    if (stack2.empty()) {
-      throw new IllegalStateException("no more element！");
-    }
-    return stack2.pop();
-  }
-
-  public static void main(String[] args) {
-    _09_QueueWithTwoStacks queueWithTwoStacks = new _09_QueueWithTwoStacks();
-    queueWithTwoStacks.push(1);
-    queueWithTwoStacks.push(2);
-    queueWithTwoStacks.push(3);
-    queueWithTwoStacks.push(4);
-    queueWithTwoStacks.push(6);
-    System.out.println(
-        queueWithTwoStacks.pop() + "," + queueWithTwoStacks.pop() + "," + queueWithTwoStacks.pop()
-            + "," + queueWithTwoStacks.pop() + "," + queueWithTwoStacks.pop());
-
-
   }
 
 }

@@ -8,11 +8,14 @@ public class _27_MirrorTree {
 
   public TreeNode mirrorTree(TreeNode root) {
     if (root == null) {
-      return root;
+      return null;
     }
+
+    mirrorTree(root.left);
+    mirrorTree(root.right);
     TreeNode tmp = root.left;
-    root.left = mirrorTree(root.right);
-    root.right = mirrorTree(tmp);
+    root.left = root.right;
+    root.right = tmp;
     return root;
   }
 }
