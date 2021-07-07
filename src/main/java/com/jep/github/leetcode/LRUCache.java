@@ -89,28 +89,6 @@ public class LRUCache {
     return last;
 
   }
-
-  public static void main(String args[]) {
-    /**
-     * ["LRUCache","put","put","get","put","get","put","get","get","get"]
-     * [[2],[1,1],[2,2],[1],[3,3],[2],[4,4],[1],[3],[4]]
-     *
-     * [null,null,null,1,null,-1,null,-1,3,4]
-     */
-
-    LRUCache lruCache = new LRUCache(2);
-    lruCache.put(1, 1);
-    lruCache.put(2, 2);
-    System.out.println(lruCache.get(1));
-    lruCache.put(3, 3);
-    System.out.println(lruCache.get(2));
-    lruCache.put(4, 4);
-    System.out.println(lruCache.get(1));
-    System.out.println(lruCache.get(3));
-    System.out.println(lruCache.get(4));
-
-
-  }
 }
 
 class DLinkedNode {
@@ -127,27 +105,5 @@ class DLinkedNode {
   public DLinkedNode(Integer key, Integer value) {
     this.value = value;
     this.key = key;
-  }
-
-  //新增元素放到头部
-  public void moveToHead(DLinkedNode head) {
-    this.post = head;
-    head.pre = this;
-  }
-
-
-  //新增元素放到，返回头结点
-  public void moveToTail(DLinkedNode tail) {
-    this.post = tail;
-    this.pre = tail.pre;
-    tail.pre.post = this;
-    tail.pre = this;
-
-  }
-
-
-  public void removeNode() {
-    this.pre.post = this.post;
-    this.post.pre = this.pre;
   }
 }
