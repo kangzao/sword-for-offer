@@ -37,6 +37,7 @@ public class _15_ThreeSum {
         //恰好等于0的时候，要去重
         if (sum == 0) {
           res.add(Arrays.asList(nums[i], nums[left], nums[right]));
+          //left < right必须写在前面，不然[0，0，0]会出现数组索引溢出
           while (left < right && nums[left + 1] == nums[left]) {
             left++;
           }
