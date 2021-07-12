@@ -9,6 +9,19 @@ import java.util.List;
  */
 public class _114_Flatten {
 
+  private static TreeNode pre = null;
+
+  public static void flatten_recursion(TreeNode root) {
+    if (root == null) {
+      return;
+    }
+    flatten_recursion(root.right);
+    flatten_recursion(root.left);
+    root.right = pre;
+    root.left = null;
+    pre = root;
+  }
+
 
   //最直观的方法，先前序遍历放到集合中再调整各节点关系
   public static void flatten(TreeNode root) {
@@ -65,7 +78,7 @@ public class _114_Flatten {
     treeNode1.left = treeNode3;
     treeNode2.right = treeNode4;
     TreeNode root = new TreeNode(3, treeNode1, treeNode2);
-    flatten(root);
+    flatten_recursion(root);
     System.out.println(root);
 
 
