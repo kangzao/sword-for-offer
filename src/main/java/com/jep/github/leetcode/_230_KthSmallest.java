@@ -1,6 +1,7 @@
 package com.jep.github.leetcode;
 
 import com.jep.github.leetcode.TreeNode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,18 +11,40 @@ import java.util.List;
  */
 public class _230_KthSmallest {
 
-  public int kthSmallest(TreeNode root, int k) {
-    List<Integer> result = new ArrayList<Integer>();
-    traversal(root, result);
-    return result.get(k - 1);
-  }
+    int res;
+    int count;
 
-  public void traversal(TreeNode root, List<Integer> result) {
-    if (root == null) {
-      return;
+    public int kthSmallest(TreeNode root, int k) {
+        List<Integer> result = new ArrayList<Integer>();
+        traversal(root, result);
+        return result.get(k - 1);
     }
-    traversal(root.left, result);
-    result.add(root.val);
-    traversal(root.right, result);
-  }
+
+    public void traversal(TreeNode root, List<Integer> result) {
+        if (root == null) {
+            return;
+        }
+        traversal(root.left, result);
+        result.add(root.val);
+        traversal(root.right, result);
+    }
+
+
+    public int kthSmallest_1(TreeNode root, int k) {
+        inOrder(root, k);
+        return res;
+    }
+
+    public void inOrder(TreeNode root, int k) {
+        if (root == null) {
+            return;
+        }
+        inOrder(root.left, k);
+        count++;
+        if (k == count) {
+            res = root.val;
+            return;
+        }
+        inOrder(root.right, k);
+    }
 }
