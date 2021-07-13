@@ -10,36 +10,50 @@ import java.util.List;
 public class _54_SpiralOrder {
 
   public List<Integer> spiralOrder(int[][] matrix) {
-    if (matrix == null || matrix.length == 0) {
-      return null;
-    }
 
-    int down = matrix.length - 1, right = matrix[0].length - 1, left = 0, up = 0;
-    List<Integer> res = new ArrayList<>((down + 1) * (right + 1));
-    while (left <= right && up <= down) {
-      //left to right
-      for (int i = 0; i <= right; i++) {
-        res.add(matrix[up][i]);
+    int left = 0, up = 0, right = matrix[0].length - 1, down = matrix.length - 1;
+    List<Integer> list = new ArrayList<>();
+
+    while (true) {
+      //从左往右 行不变 列变 left增大
+      for (int i = left; i <= right; i++) {
+        list.add(matrix[up][i]);
       }
       up++;
-      //up to down
+      //for循环不满足的时候，up++仍然被执行，此时要判断up的越界问题
+      if (up > down) {
+        break;
+      }
+
+      //从上往下 行变 列不变 up增大
       for (int i = up; i <= down; i++) {
-        res.add(matrix[right][i]);
+        list.add(matrix[i][right]);
+
       }
       right--;
-      //right to left
+      if (right < left) {
+        break;
+      }
+      //从右往左 列变 行不变  right减小
       for (int i = right; i >= left; i--) {
-        res.add(matrix[down][i]);
+        list.add(matrix[down][i]);
+
       }
       down--;
-      //down to up
+      if (down < up) {
+        break;
+      }
+
+      //从下往上 行减小 列不变
       for (int i = down; i >= up; i--) {
-        res.add(matrix[down][i]);
+        list.add(matrix[i][left]);
       }
       left++;
+      if (left > right) {
+        break;
+      }
     }
-    return res;
-
+    return list;
   }
 
 }
