@@ -21,7 +21,8 @@ public class _33_Search {
       if (nums[mid] == target) {
         return mid;
       }
-      //判断左半边是不是递增
+      //判断左半边是不是递增 必须写成等于。
+      // 因为迭代到最后，mid有可能和0重合
       if (nums[mid] >= nums[0]) {
         if (target >= nums[0] && target < nums[mid]) {
           //在左半边，减小right
