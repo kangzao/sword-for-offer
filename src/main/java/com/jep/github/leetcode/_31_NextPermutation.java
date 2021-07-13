@@ -8,41 +8,48 @@ public class _31_NextPermutation {
 
 
   public void nextPermutation(int[] nums) {
-    //1,2,3,8,5,7,6,4
-    //“下一个排列”的定义是：给定数字序列的字典序中下一个更大的排列。如果不存在下一个更大的排列，
-    // 则将数字重新排列成最小的排列（即升序排列）。
-    //以123456为例，可以看到有这样的关系：123456 < 123465 < 123546 < ... < 654321
-    //查找规律：如果数字中有一部分全都是降序 XXXX654，则654部分已经是最大字典顺序了，不存在更大的排列
-    //先找非递减的那个数字，然后在递减区间再去找第一个大于该数字的较大值，因为这个较大值将用于后面和该数字交换，
-    //所以必须大于该数字，否则交换后得到的结果并不会大于原来结果，此规律可得452631的较大值应该是453621
+    //1 2 3 8 5 7 6 4
+    //7 6 4是降序，是最大字典顺序，要找到降序点,从后向前找降序点
     int i = nums.length - 2;
+    //i >=0 必须放在前面，否则，i会变成负数
     while (i >= 0 && nums[i] >= nums[i + 1]) {
       i--;
     }
-    //找到第一个非降序点
+    // System.out.println(i);
+    //此时i走到降序点，即 5 所在的位置 在降序点后找一个比5大的最小数和5交换 如果是 3,2,1 则 i会变成-1，跳过下面的if语句
+    //
     if (i >= 0) {
-      //此时i之后的都是降序，1,2,3,8,5,7,6,4   i=4
       int j = nums.length - 1;
-      //i之后的数字全部是升序，因此从右往左找到的第一个比nums[i]大的数组和nums[i]交换
-      while (nums[j] <= nums[i]) {
+      //j如果不满足条件则继续移动
+      while (j >= 0 && nums[j] <= nums[i]) {
         j--;
       }
-      swap(nums, i, j);//交换位置
+      swap(nums, i, j);
     }
-    //如果交换完了，后面的数字必须降序排列，才能刚好获得下一个更大的序列
-    int k = nums.length - 1;
-    i++;
-    while (i < k) {
-      swap(nums, i, k);
-      i++;
-      k--;
+    //1 2 3 8 6 7 5 4
+    //将i之后的数字进行排序，从小到大排序，此时 7 5 4肯定是降序，直接反转数组即可
+    reverse(nums, i);
+  }
+
+  public void reverse(int[] nums, int after) {
+    int i = after + 1, j = nums.length - 1;
+    while (i <= j) {
+      swap(nums, i++, j--);
     }
   }
 
   public void swap(int[] nums, int i, int j) {
-    int temp = nums[i];
+    int tmp = nums[i];
     nums[i] = nums[j];
-    nums[j] = temp;
+    nums[j] = tmp;
   }
+
+  public static void main(String args[]) {
+    int[] array = {1, 2};
+    _31_NextPermutation permutation = new _31_NextPermutation();
+    permutation.nextPermutation(array);
+
+  }
+
 
 }
