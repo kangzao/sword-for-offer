@@ -20,7 +20,7 @@ public class _54_SpiralOrder {
         list.add(matrix[up][i]);
       }
       up++;
-      //for循环不满足的时候，up++仍然被执行，此时要判断up的越界问题
+      //for循环不满足的时候，up++仍然被执行，此时要判断up的越界问题 其他几个方向也是类似的
       if (up > down) {
         break;
       }
