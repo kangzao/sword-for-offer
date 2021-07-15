@@ -20,7 +20,7 @@ public class _39_CombinationSum {
     dfs(candidates, target, 0);
     return res;
   }
-
+  //start是指从第几个开始选，start之前的就不参与选择了，这样可以防止重复[[2,2,3],[2,3,2],[3,2,2],[7]
   public void dfs(int[] candidates, int remain, int start) {
     if (0 == remain) {
       res.add(new ArrayList<>(path));
