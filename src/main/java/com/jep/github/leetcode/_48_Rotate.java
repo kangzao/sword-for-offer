@@ -14,7 +14,7 @@ public class _48_Rotate {
         swap(matrix, i, j, m - i - 1, j);
       }
     }
-    //对角线交换
+    //对角线交换
     for (int i = 0; i < m; i++) {
       for (int j = 0; j < i; j++) {
         System.out.println(i + "," + j);
