@@ -13,12 +13,14 @@ public class _16_ThreeSumClosest {
     //这里res不设置成Integer.MAX_VALUE，是因为Integer.MAX_VALUE减去负数会变成Integer.MIN_VALUE
     int res = nums[0] + nums[1] + nums[2];
     for (int i = 0; i < nums.length - 2; i++) {
+      if (i > 0 && nums[i] == nums[i - 1]) {
+        continue;
+      }
       int left = i + 1, right = nums.length - 1;
       while (left < right) {
         int sum = nums[i] + nums[left] + nums[right];
         if (Math.abs(sum - target) < Math.abs(res - target)) {
           res = sum;
-          System.out.println(res);
         }
         if (sum > target) {
           right--;
@@ -27,6 +29,7 @@ public class _16_ThreeSumClosest {
         } else {
           return sum;
         }
+
       }
     }
     return res;
