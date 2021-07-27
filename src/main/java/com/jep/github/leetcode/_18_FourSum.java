@@ -7,50 +7,56 @@ import java.util.List;
 /*
  * @author: enping.jep
  * @create: 2020-08-28 2:47 PM
+ * @update：2021年07月27日19:09:03
  */
 public class _18_FourSum {
 
 
   public static List<List<Integer>> fourSum(int[] nums, int target) {
+    List<List<Integer>> res = new ArrayList<>();
     Arrays.sort(nums);
-    List<List<Integer>> list = new ArrayList<>();
-    int right = nums.length - 1;
-    for (int i = 0; i < nums.length; i++) {
-      int n1 = nums[i];
-      //有序数组，第N位大于target则后面的不用判断
-      if (n1 > 0 && n1 > target) {
-        break;
-      }
-      //防止重复,当前数字和前一个数字相同则跳出当前循环
-      if (i > 0 && nums[i - 1] == n1) {
+    int n = nums.length;
+
+    for (int i = 0; i < n - 3; i++) {
+      //防止重复
+      if (i > 0 && nums[i] == nums[i - 1]) {
         continue;
       }
-
-      //三数之和
-      for (int j = i + 1; j < nums.length; j++) {
-        List<Integer> subList = new ArrayList<>();
-        int n2 = nums[j];
-        if (n2 > 0 && n2 + n1 > target) {
-          break;
-        }
-        //这里容易写成j>1，那么0, 0, 0, 0, 0, 0和target=0会没有结果
-        if (j > i + 1 && nums[j - 1] == nums[j]) {
+      //数组升序，如果已经大于target，直接退出
+      if (nums[i] + nums[i + 1] + nums[i + 2] + nums[i + 3] > target) {
+        break;
+      }
+      if (nums[i] + nums[n - 1] + nums[n - 2] + nums[n - 3] < target) {
+        continue;
+      }
+      //确定了一个数字之后，则计算三数之和
+      for (int j = i + 1; j < n - 2; j++) {
+        if (j > i + 1 && nums[j] == nums[j - 1]) {
           continue;
         }
-        int left = j + 1;
+        if (nums[i] + nums[j] + nums[j + 1] + nums[j + 2] > target) {
+          break;
+        }
+        if (nums[i] + nums[j] + nums[n - 1] + nums[n - 2] < target) {
+          continue;
+        }
+
+        int left = j + 1, right = n - 1;
         while (left < right) {
-          int n3 = nums[left];
-          int n4 = nums[right];
-          int sum = n1 + n2 + n3 + n4;
+          int sum = nums[i] + nums[j] + nums[left] + nums[right];
           if (sum == target) {
-            list.add(Arrays.asList(n1, n2, n3, n4));
-            //当条件满足时，左右指针肯定要各自移动，但在移动过程中可能出现重复，比如：10202左右指针在0和2上，需要除重。
-            while (left < right && nums[left] == n3) {
+            res.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));
+            //去重
+            while (left < right && nums[left] == nums[left + 1]) {
               left++;
             }
-            while (left < right && nums[right] == n4) {
+            left++;
+            //去重
+            while (left < right && nums[right] == nums[right - 1]) {
               right--;
             }
+
+            right--;
           } else if (sum < target) {
             left++;
           } else {
@@ -58,9 +64,8 @@ public class _18_FourSum {
           }
         }
       }
-
     }
-    return list;
+    return res;
   }
 
   public static void main(String args[]) {
