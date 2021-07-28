@@ -19,6 +19,7 @@ public class _75_SortColors {
         swap(nums, i, p2);
         p2--;
       }
+      // 此时，如果nums[i] 为 0,和p0位置交换，放到数组头部
       if (nums[i] == 0) {
         swap(nums, i, p0);
         p0++;
