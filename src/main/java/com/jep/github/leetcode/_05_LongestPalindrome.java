@@ -40,7 +40,7 @@ public class _05_LongestPalindrome {
       left--;
       right++;
     }
-    //左闭右开
+    //左闭右开 当两端不相等的时候循环结束，此时left被减了一次，right被多加了一次 所以要left + 1
     return s.substring(left + 1, right);
   }
 
