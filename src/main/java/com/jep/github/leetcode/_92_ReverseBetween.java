@@ -11,25 +11,27 @@ import com.jep.github.swordForOffer.ListNode;
  */
 public class _92_ReverseBetween {
 
-  public static ListNode reverseBetween(ListNode head, int m, int n) {
+  public static ListNode reverseBetween(ListNode head, int left, int right) {
+    //定义双指针，一个指向被移动链表的头部，一个指向头部的前一个节点
     ListNode dummy = new ListNode(-1);
     dummy.next = head;
     ListNode pre = dummy;
-    //pre表示被翻转节点的前一个节点
-    for (int i = 0; i < m - 1; i++) {
+    ListNode cur = head;
+    for (int i = 0; i < left - 1; i++) {
       pre = pre.next;
+      cur = cur.next;
     }
-    ListNode cur = pre.next;
-    for (int i = 0; i < n - m; i++) {
+    for (int i = 0; i < right - left; i++) {
+      //依次将next节点移动到pre后面
       ListNode next = cur.next;
-      cur.next = next.next;
+      //让当前节点指向next节点之后的节点
+      cur.next = cur.next.next;
+      //这里不能写成cur，头插法的意思是依次将next节点放到pre的后面，然后让next指向紧邻pre的节点pre.next
       next.next = pre.next;
       pre.next = next;
+
     }
-
     return dummy.next;
-
-
   }
 
 
