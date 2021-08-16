@@ -1,5 +1,6 @@
 package com.jep.github.supply;
 
+import com.jep.github.swordForOffer.ListNode;
 import org.junit.Test;
 
 /*
@@ -49,14 +50,15 @@ public class _02_SortList {
     //第一步 将奇数和偶数分开  1->4->3->2->5   得到 1 3 5   4 2
     ListNode evenNode = head.next, oddNode = head;
     ListNode evenHead = evenNode, oddHead = oddNode;
-    while () {
+    while (evenNode != null && oddNode != null && evenNode.next != null) {
       oddNode.next = evenNode.next;
-      evenNode.next =
-
+      evenNode.next = evenNode.next.next;
+      oddNode = oddNode.next;
+      evenNode = evenNode.next;
     }
 
     //第二步 反转偶数链表  1 3 5   2 4
-    evenHead = reverse(evenNode);
+    evenHead = reverse(evenHead);
     //第三步 合并链表
     mergeListNode(oddHead, evenHead);
     return oddHead;
