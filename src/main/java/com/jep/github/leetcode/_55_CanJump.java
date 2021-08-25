@@ -44,4 +44,17 @@ public class _55_CanJump {
     return dp[length - 1];
   }
 
+  public boolean canJump(int[] nums) {
+    int k = 0;//前n-1个元素能够到达的最远位置
+    for (int i = 0; i <= k; i++) {
+      //更新最远位置
+      k = Math.max(k, i + nums[i]);
+      //如果最远位置大于或者等于最远端的位置
+      if (k >= nums.length - 1) {
+        return true;
+      }
+    }
+    return false;
+  }
+
 }
