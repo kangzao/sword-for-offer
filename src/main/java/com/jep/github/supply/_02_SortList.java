@@ -1,7 +1,6 @@
 package com.jep.github.supply;
 
 import com.jep.github.swordForOffer.ListNode;
-import org.junit.Test;
 
 /*
  * @author: enping.jep
@@ -30,7 +29,6 @@ public class _02_SortList {
     }
   }
 
-  @Test
   public void test() {
     //测试 1-8-3-6-5-4-7-2-9
     ListNode l9 = new ListNode(9);

@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 
 /**
  * 注解版业务操作类
- *
- * @author Tom
  */
 @Service
 @Slf4j

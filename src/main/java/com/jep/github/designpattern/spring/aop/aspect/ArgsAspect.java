@@ -9,8 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * 获取参数Aspect切面Bean
- *
- * @author Tom
  */
 //声明这是一个组件
 @Component
@@ -20,18 +18,18 @@ import lombok.extern.slf4j.Slf4j;
 public class ArgsAspect {
 
   //配置切入点,该方法无方法体,主要为方便同类中其他方法使用此处配置的切入点
-  @Pointcut("execution(* com.gupaoedu.vip.pattern.spring.aop.service..*(..))")
+  @Pointcut("execution(* com.jep.github.designpattern.spring.aop.service..*(..))")
   public void aspect() {
   }
 
-  //配置前置通知,拦截返回值为cn.ysh.studio.spring.mvc.bean.User的方法
-  @Before("execution(com.gupaoedu.vip.pattern.spring.aop.model.Member com.gupaoedu.vip.pattern.spring.aop.service..*(..))")
+  //配置前置通知
+  @Before("execution(com.jep.github.designpattern.spring.aop.model.Member com.jep.github.designpattern.spring.aop.service..*(..))")
   public void beforeReturnUser(JoinPoint joinPoint) {
     log.info("beforeReturnUser " + joinPoint);
   }
 
-  //配置前置通知,拦截参数为cn.ysh.studio.spring.mvc.bean.User的方法
-  @Before("execution(* com.gupaoedu.vip.pattern.spring.aop.service..*(com.gupaoedu.vip.pattern.spring.aop.model.Member))")
+  //配置前置通知
+  @Before("execution(* com.jep.github.designpattern.spring.aop.service..*(com.jep.github.designpattern.spring.aop.model.Member))")
   public void beforeArgUser(JoinPoint joinPoint) {
     log.info("beforeArgUser " + joinPoint);
   }
