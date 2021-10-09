@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootApplication
+//@SpringBootApplication
 @ImportResource(locations = {"classpath*:application-aop.xml"})
 public class XmlAspectTest {
 
