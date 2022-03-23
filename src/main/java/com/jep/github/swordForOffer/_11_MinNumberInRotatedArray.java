@@ -26,30 +26,27 @@ package com.jep.github.swordForOffer;
 //    对应leetcode 153
 public class _11_MinNumberInRotatedArray {
 
-  public static int minNumberInRotateArray(int[] rotateArray) {
-    if (rotateArray.length == 0) {
+  public static int minNumberInRotateArray(int[] numbers) {
+    if (numbers.length == 0) {
       return 0;
     }
-
-    int low = 0;
-    int high = rotateArray.length - 1;
-    int mid = 0;
-
-    while (low < high) {
-      // 子数组是非递减的数组，10111
-      if (rotateArray[low] < rotateArray[high]) {
-        return rotateArray[low];
-      }
-      mid = low + (high - low) / 2;
-      if (rotateArray[mid] > rotateArray[low]) {
-        low = mid + 1;
-      } else if (rotateArray[mid] < rotateArray[high]) {
-        high = mid;
+    int start = 0, end = numbers.length - 1;
+    while (start < end) {
+      //比如：93456
+      int pivot = start + (end - start) / 2;
+      if (numbers[pivot] < numbers[end]) {
+        //说明pivot右侧递增 45123 mid的位置有可能指向最小值
+        end = pivot;
+      } else if (numbers[pivot] > numbers[end]) {
+        //56934 mid的位置在最小值的左侧
+        start = pivot + 1;
       } else {
-        low++;
+        //45222 如果相等就用暴力法，移动右侧边界 其他情况可以二分
+        //时间复杂度：log2n 所有数字相同是O(n)
+        end--;
       }
     }
-    return rotateArray[low];
+    return numbers[start];
   }
 
 
