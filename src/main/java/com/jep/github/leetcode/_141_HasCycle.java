@@ -9,19 +9,18 @@ import com.jep.github.swordForOffer.ListNode;
 public class _141_HasCycle {
 
   public static boolean hasCycle(ListNode head) {
-    if (head == null) {
-      return false;
-    }
     ListNode fast = head, slow = head;
+    //同时出发，fast走的快，只需要判断fast是不是已经走完了
 
     while (fast != null && fast.next != null) {
-      slow = slow.next;
       fast = fast.next.next;
+      slow = slow.next;
       if (fast == slow) {
         return true;
       }
     }
     return false;
+
   }
 
   public static void main(String args[]) {
