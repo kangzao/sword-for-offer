@@ -16,19 +16,20 @@ public class _92_ReverseBetween {
     ListNode dummy = new ListNode(-1);
     dummy.next = head;
     ListNode pre = dummy;
-    ListNode cur = head;
+
     for (int i = 0; i < left - 1; i++) {
       pre = pre.next;
-      cur = cur.next;
     }
+    ListNode cur = pre.next;
     for (int i = 0; i < right - left; i++) {
       //依次将next节点移动到pre后面
       ListNode next = cur.next;
       //让当前节点指向next节点之后的节点
       cur.next = cur.next.next;
       //这里不能写成cur，头插法的意思是依次将next节点放到pre的后面，然后让next指向紧邻pre的节点pre.next
-      next.next = pre.next;
+      next.next = cur;
       pre.next = next;
+      head.printNode();
 
     }
     return dummy.next;
@@ -47,7 +48,7 @@ public class _92_ReverseBetween {
     node3.next = node4;
     node4.next = node5;
     node5.next = node6;
-    node1.printNode();
+//    node1.printNode();
     reverseBetween(node1, 2, 4).printNode();
   }
 
