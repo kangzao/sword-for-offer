@@ -27,7 +27,7 @@ public class _92_ReverseBetween {
       //让当前节点指向next节点之后的节点
       cur.next = cur.next.next;
       //这里不能写成cur，头插法的意思是依次将next节点放到pre的后面，然后让next指向紧邻pre的节点pre.next
-      next.next = cur;
+      next.next = pre.next;
       pre.next = next;
       head.printNode();
 
