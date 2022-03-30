@@ -50,6 +50,26 @@ public class _24_SwapPairs {
     return dummy.next;
   }
 
+  public ListNode swapPairs(ListNode head) {
+    ListNode pre = new ListNode(-1);
+    pre.next = head;
+    ListNode dummy = pre;
+    while (head != null && head.next != null) {
+      ListNode next = head.next; //2
+      // -1 1 2 3 4
+      // -1 2 1 3 4
+      pre.next = next; // -1 2
+      head.next = next.next;// 1 3
+      next.next = head;// 2 1
+
+      pre = head;
+      head = pre.next;
+    }
+    return dummy.next;
+
+
+  }
+
 
   public static void main(String args[]) {
     ListNode node1 = new ListNode(1);
