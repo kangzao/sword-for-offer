@@ -65,7 +65,7 @@ public class _148_SortList {
     if (head == null || head.next == null) {
       return head;
     }
-    ListNode fast = head, slow = head;
+    ListNode fast = head.next, slow = head;
     while (fast != null && fast.next != null) {
       fast = fast.next.next;
       slow = slow.next;
