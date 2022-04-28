@@ -31,7 +31,7 @@ public class _653_FindTarget {
     }
     return dfs(root, cur.left, k) || dfs(root, cur.right, k);
   }
-
+  //For each node, we check if k - node.val exists in this BST.
   public boolean search(TreeNode root, TreeNode cur, int value) {
     if (root == null) {
       return false;
