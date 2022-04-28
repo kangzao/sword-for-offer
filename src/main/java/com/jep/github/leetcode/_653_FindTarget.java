@@ -21,6 +21,7 @@ public class _653_FindTarget {
     return dfs(root, root, k);
   }
 
+  //遍历每一个节点，将每一个节点的值当做k的一部分
   public boolean dfs(TreeNode root, TreeNode cur, int k) {
     if (cur == null) {
       return false;
@@ -31,7 +32,7 @@ public class _653_FindTarget {
     }
     return dfs(root, cur.left, k) || dfs(root, cur.right, k);
   }
-  //For each node, we check if k - node.val exists in this BST.
+  //当前节点不变，从头开始找值等于k-cur.val的节点
   public boolean search(TreeNode root, TreeNode cur, int value) {
     if (root == null) {
       return false;
