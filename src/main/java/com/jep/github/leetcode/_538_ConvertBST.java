@@ -8,16 +8,20 @@ import com.jep.github.leetcode.TreeNode;
  */
 public class _538_ConvertBST {
 
-  int sum = 0;
 
   public TreeNode convertBST(TreeNode root) {
-    if (root == null) {
-      return null;
-    }
-    convertBST(root.right);
-    sum += root.val;
-    root.val = sum;
-    convertBST(root.left);
+    dfs(root, 0);
     return root;
+  }
+
+  /**
+   * @param sum 右侧子树中所有节点的和
+   */
+  public int dfs(TreeNode root, int sum) {
+    if (root == null) {
+      return sum;
+    }
+    root.val += dfs(root.right, sum);
+    return dfs(root.left, root.val);
   }
 }
