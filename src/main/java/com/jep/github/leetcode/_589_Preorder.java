@@ -1,6 +1,8 @@
 package com.jep.github.leetcode;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 /*
@@ -29,6 +31,29 @@ public class _589_Preorder {
       }
     }
 
+  }
+
+
+  public List<Integer> preorder_traversal(Node root) {
+    List<Integer> list = new ArrayList<Integer>();
+    if (root == null) {
+      return list;
+    }
+    //根左右
+    Deque<Node> queue = new ArrayDeque<>();
+    queue.push(root);
+    while (!queue.isEmpty()) {
+      Node node = queue.pop();
+      list.add(node.val);
+      List<Node> children = node.children;
+      if (children != null) {
+        for (int i = children.size() - 1; i >= 0; i--) {
+          queue.push(children.get(i));
+        }
+      }
+
+    }
+    return list;
   }
 
   public static void main(String args[]) {
