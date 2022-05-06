@@ -9,26 +9,31 @@ import com.jep.github.leetcode.TreeNode;
 public class _68_LowestCommonAncestor {
 
   public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-    if (root == null || p == root || q == root || (p == null && q == null)) {
+    //最近公共祖先
+    //分情况讨论 ：
+
+    //p或者q在root的左右子树中，则返回root
+    //p在q的左或者右侧子树中
+    //q在p的左或者右侧子树中
+
+    if (root == null) {
+      return null;
+    }
+    //p或者q有一个是root，则直接返回root
+    if (p == root || q == root) {
       return root;
     }
-    if (p == q) {
-      return p;
-    }
-    //在左子树中寻找p或者q
+    //在左子树中查找p或者q
     TreeNode left = lowestCommonAncestor(root.left, p, q);
-    //在右子树中寻找p或者q
     TreeNode right = lowestCommonAncestor(root.right, p, q);
-    //左子树为空，说明全都在右子树
-    if (left == null) {
-      return right;
+    //两侧都找不到，返回null
+    if (left == null && right == null) {
+      return null;
+    } else if (left != null && right != null) {
+      return root;//都找到，说明在两侧,root才是公共祖先
+    } else {//至少找到一个，另一个要么是空，要么是先找到那个节点的子节点
+      return left == null ? right : left;
     }
-    //右子树为空，说明pq都在左子树，返回找到的第一个节点即可
-    if (right == null) {
-      return left;
-    }
-    //否则，当 left和 right均不为空时，说明 p、q节点分别在 root异侧, 最近公共祖先即为 root
-    return root;
   }
 
 }
