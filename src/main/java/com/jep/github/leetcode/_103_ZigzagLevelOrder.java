@@ -1,5 +1,7 @@
 package com.jep.github.leetcode;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,40 +14,39 @@ import java.util.Queue;
 public class _103_ZigzagLevelOrder {
 
   public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-    List<List<Integer>> list = new LinkedList<>();
+    List<List<Integer>> res = new ArrayList<>();
     if (root == null) {
-      return list;
+      return res;
     }
-    //存放每层的节点
-    Queue<TreeNode> queue = new LinkedList<>();
-    queue.offer(root);
-    boolean isOrderLeft = true;
+    //奇数层从左往右，偶数层从右往左
+    Deque<TreeNode> deque = new ArrayDeque<>();
+    deque.offer(root);
+    boolean leftToRight = true;//打印顺序
+    while (!deque.isEmpty()) {
+      LinkedList<Integer> list = new LinkedList<>();
+      int len = deque.size();
 
-    while (!queue.isEmpty()) {
-      //存放每层的元素，需要按照锯齿顺序(从左到右或者从右到左),双端队列，可以在队列的两头进行操作
-      Deque<Integer> levelList = new LinkedList<Integer>();
-      int size = queue.size();
-      //处理每一层
-      for (int i = 0; i < size; i++) {
-        TreeNode node = queue.poll();
-        if (isOrderLeft) {
-          levelList.offerLast(node.val);
+      for (int i = 0; i < len; i++) {
+        TreeNode node = deque.poll();//队列从头部移除，尾部加入
+
+        //从左往右打印，则将节点放到队尾
+        if (leftToRight) {
+          list.add(node.val);
         } else {
-          levelList.offerFirst(node.val);
+          //从右往左打印，则将节点放到头部
+          list.addFirst(node.val);
         }
-
         if (node.left != null) {
-          queue.offer(node.left);
+          deque.add(node.left);
         }
-
         if (node.right != null) {
-          queue.offer(node.right);
+          deque.add(node.right);
         }
       }
-      list.add(new LinkedList<>(levelList));
-      isOrderLeft = !isOrderLeft;
+      leftToRight = !leftToRight;
+      res.add(list);
     }
-    return list;
+    return res;
   }
 
 }
