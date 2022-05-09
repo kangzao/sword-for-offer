@@ -1,32 +1,41 @@
 package com.jep.github.leetcode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
  * @author: enping.jep
  * @create: 2021-05-27 9:21 上午
  */
 public class _129_SumNumbers {
 
-  int sum = 0;
-  StringBuilder sb = new StringBuilder();
+  int res = 0;
 
   public int sumNumbers(TreeNode root) {
-    dfs(root);
-    return sum;
+    dfs(root, new ArrayList<>());
+    return res;
   }
 
-  public void dfs(TreeNode root) {
+  public void dfs(TreeNode root, List<Integer> list) {
     if (root == null) {
       return;
     }
-    sb.append(root.val);
+    list.add(root.val);
     if (root.left == null && root.right == null) {
-      sum += Integer.parseInt(sb.toString());
+      res += getSum(list);
     }
-    dfs(root.left);
-    dfs(root.right);
+    dfs(root.left, list);
+    dfs(root.right, list);
+    list.remove(list.size() - 1);
+  }
 
-    sb = sb.deleteCharAt(sb.length() - 1);
-
+  //路径上的和
+  public int getSum(List<Integer> list) {
+    int sum = 0;
+    for (Integer item : list) {
+      sum = sum * 10 + item;
+    }
+    return sum;
   }
 
   public static void main(String args[]) {
