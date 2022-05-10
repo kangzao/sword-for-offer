@@ -1,5 +1,6 @@
 package com.jep.github.leetcode;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -11,31 +12,25 @@ public class _662_WidthOfBinaryTree {
 
   public int widthOfBinaryTree(TreeNode root) {
     int maxLen = 1;
-    //广度优先遍历存放节点
-    Deque<TreeNode> queue = new LinkedList<>();
-    //存放非空节点的索引位置
-    Deque<Integer> list = new LinkedList<>();
-
-    list.add(1); //根节点的索引值是i，左子节点的索引是2*i 右子节点索引是2*i+1
-    queue.offer(root);
-    //层序遍历
-    while (!queue.isEmpty()) {
-      int n = queue.size();
-      for (int i = 0; i < n; i++) {
-        TreeNode node = queue.poll();
-        int curIndex = list.removeFirst();
+    Deque<TreeNode> nodeDeque = new ArrayDeque<>();
+    Deque<Integer> indexDeque = new ArrayDeque<>();
+    nodeDeque.offer(root);
+    indexDeque.offer(1);
+    while (!nodeDeque.isEmpty()) {
+      for (int i = nodeDeque.size() - 1; i >= 0; i--) {
+        TreeNode node = nodeDeque.poll();
+        Integer curIndex = indexDeque.poll();
         if (node.left != null) {
-          queue.offer(node.left);
-          list.add(2 * curIndex);
+          nodeDeque.offer(node.left);
+          indexDeque.offer(2 * curIndex);
         }
         if (node.right != null) {
-          queue.offer(node.right);
-          list.add(2 * curIndex + 1);
+          nodeDeque.offer(node.right);
+          indexDeque.offer(2 * curIndex + 1);
         }
       }
-      //list中的元素最终会在上面的循环结束后变为空，队列为空的时候，getlast会抛出异常NoSuchElementException，因此这里必须加判断
-      if (list.size() >= 2) {
-        maxLen = Math.max(list.getLast() - list.getFirst() + 1, maxLen);
+      if (indexDeque.size() >= 2) {
+        maxLen = Math.max(indexDeque.getLast() - indexDeque.getFirst() + 1, maxLen);
       }
     }
     return maxLen;
