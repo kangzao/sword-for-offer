@@ -16,7 +16,8 @@ public class _958_IsCompleteTree {
     TreeNode prev = root;
     queue.add(root);
     while (!queue.isEmpty()) {
-      TreeNode node = queue.remove();
+
+      TreeNode node = queue.poll();
       if (prev == null && node != null) {
         return false;
       }
@@ -26,6 +27,7 @@ public class _958_IsCompleteTree {
       }
       prev = node;
     }
+
     return true;
   }
 
