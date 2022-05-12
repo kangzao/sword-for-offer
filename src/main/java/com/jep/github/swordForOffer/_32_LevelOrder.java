@@ -1,40 +1,42 @@
 package com.jep.github.swordForOffer;
 
 import com.jep.github.leetcode.TreeNode;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 /*
  * @author: enping.jep
- * @create: 2022-05-05 2:35 下午
+ * @create: 2022-05-12 8:17 下午
  */
 public class _32_LevelOrder {
 
   public List<List<Integer>> levelOrder(TreeNode root) {
     List<List<Integer>> res = new ArrayList<>();
-    if (root == null) {
-      return res;
-    }
-    Queue<TreeNode> queue = new LinkedList<>();
-    queue.add(root);
-    while (!queue.isEmpty()) {
-      List<Integer> list = new ArrayList<>();
-      //size会发生变化
-      int len = queue.size();
-      for (int i = 0; i < len; i++) {
-        TreeNode node = queue.poll();
-        list.add(node.val);
+    int n = 1;
+    Deque<TreeNode> deque = new ArrayDeque<>();
+    deque.offer(root);
+    while (!deque.isEmpty()) {
+      LinkedList<Integer> list = new LinkedList<>();
+      for (int i = deque.size() - 1; i >= 0; i--) {
+        TreeNode node = deque.poll();
+        if (n % 2 == 1) {
+          list.addLast(node.val);
+        } else {
+          list.addFirst(node.val);
+        }
+
         if (node.left != null) {
-          queue.add(node.left);
+          deque.offer(node.left);
         }
         if (node.right != null) {
-          queue.add(node.right);
+          deque.offer(node.right);
         }
       }
+      n++;
       res.add(list);
-
     }
     return res;
   }
