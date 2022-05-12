@@ -9,63 +9,24 @@ import java.util.List;
  */
 public class _114_Flatten {
 
-  private static TreeNode pre = null;
-
-  public static void flatten_recursion(TreeNode root) {
-    if (root == null) {
-      return;
-    }
-    flatten_recursion(root.right);
-    flatten_recursion(root.left);
-    root.right = pre;
-    root.left = null;
-    pre = root;
-  }
-
-
-  //最直观的方法，先前序遍历放到集合中再调整各节点关系
   public static void flatten(TreeNode root) {
-    List<TreeNode> list = new ArrayList<>();
-    preorderTraversal(root, list);
-
-    for (int i = 1; i < list.size(); i++) {
-      TreeNode tmp;
-      tmp = list.get(i - 1);
-      tmp.right = list.get(i);
-      tmp.left = null;
-    }
-
-  }
-
-
-  public static void flatten1(TreeNode root) {
     if (root == null) {
       return;
     }
     flatten(root.left);
     flatten(root.right);
-
+    //左右子树已被拉成一条链表
     TreeNode left = root.left;
     TreeNode right = root.right;
-    root.left = null;
+
     root.right = left;
+    root.left = null;
+
     TreeNode p = root;
     while (p.right != null) {
       p = p.right;
     }
     p.right = right;
-
-  }
-
-
-  //前序遍历
-  public static void preorderTraversal(TreeNode root, List<TreeNode> list) {
-    if (root == null) {
-      return;
-    }
-    list.add(root);
-    preorderTraversal(root.left, list);
-    preorderTraversal(root.right, list);
 
   }
 
@@ -78,7 +39,7 @@ public class _114_Flatten {
     treeNode1.left = treeNode3;
     treeNode2.right = treeNode4;
     TreeNode root = new TreeNode(3, treeNode1, treeNode2);
-    flatten_recursion(root);
+    flatten(root);
     System.out.println(root);
 
 
