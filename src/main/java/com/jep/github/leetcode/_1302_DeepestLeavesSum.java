@@ -24,9 +24,9 @@ public class _1302_DeepestLeavesSum {
         if (node.right != null) {
           deque.offer(node.right);
         }
-        if (node.left == null && node.right == null) {
-          sum += node.val;
-        }
+
+        sum += node.val;
+
       }
     }
     return sum;
