@@ -22,39 +22,28 @@ public class _450_DeleteNode {
     if (root == null) {
       return null;
     }
-
-    if (root.val == key) {
-      //1、删除的节点没有子节点
-      if (root.left == null && root.right == null) {
-        return null;
-      }
-      //2、删除的节点只有一个子节点
-      if (root.right == null) {
-        return root.left;
-      }
-
+    if (key < root.val) {
+      //需要从左子树中删除该节点，同时保持左子树为二叉搜索树，重新设置root的左子树
+      root.left = deleteNode(root.left, key);
+    } else if (key > root.val) {
+      root.right = deleteNode(root.right, key);
+    } else {//key和root的值相等
       if (root.left == null) {
         return root.right;
       }
-      //3、处理有两个子节点的情况，需要从左侧选一个最大节点，或者从右侧选一个最小节点替换根节点，然后删除左侧最大或者右侧最小
-      TreeNode treeNode = getMin(root.right);
-      root.val = treeNode.val;
-      root.right = deleteNode(root.right, treeNode.val);
-    } else if (key > root.val) {
-      root.right = deleteNode(root.right, key);
-    } else {
-      root.left = deleteNode(root.left, key);
+      if (root.right == null) {
+        return root.left;
+      }
+      //左子树和右子树都不为空，此时要找到右子树最小的那个值，即：右子树最靠左的叶子节点，然后把左子树接到这个节点后面
+      TreeNode rightSmallest = root.right;
+      while (rightSmallest.left != null) {
+        rightSmallest = rightSmallest.left;
+      }
+      rightSmallest.left = root.left;
+      //删除root，返回新的头结点
+      root = root.right;
     }
     return root;
-  }
-
-  //从右侧节点中找到最小的节点
-  public TreeNode getMin(TreeNode right) {
-    while (right.left != null) {
-      right = right.left;
-    }
-    return right;
-
   }
 
 
