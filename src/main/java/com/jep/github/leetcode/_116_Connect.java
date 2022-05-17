@@ -1,10 +1,42 @@
 package com.jep.github.leetcode;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /*
  * @author: enping.jep
  * @create: 2020-12-08 7:59 PM
  */
 public class _116_Connect {
+
+
+  public PerfectNode connect_bfs(PerfectNode root) {
+    if (root == null) {
+      return root;
+    }
+    Deque<PerfectNode> deque = new ArrayDeque<>();
+    deque.offer(root);
+
+    while (!deque.isEmpty()) {
+      PerfectNode pre = null;
+      //层序遍历
+      for (int i = deque.size() - 1; i >= 0; i--) {
+        PerfectNode node = deque.poll();
+        if (pre != null) {
+          pre.next = node;
+        }
+        pre = node;
+        if (node.left != null) {
+          deque.offer(node.left);
+        }
+        if (node.right != null) {
+          deque.offer(node.right);
+        }
+      }
+
+    }
+    return root;
+  }
 
 
   public PerfectNode connect(PerfectNode root) {
