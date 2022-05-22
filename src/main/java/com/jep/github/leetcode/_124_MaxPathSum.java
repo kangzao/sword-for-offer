@@ -8,32 +8,25 @@ import java.util.List;
 
 public class _124_MaxPathSum {
 
-  int maxValue = Integer.MIN_VALUE;
-  public int maxPathSum(TreeNode root) {
-    getOneSideMaxValue(root);
-    return maxValue;
-  }
+    int maxVal = Integer.MIN_VALUE;
 
-  //左子树或者右子树的最大值，因为从上游下来，要么走左子树,要么走右子树，然后更新到全局最大和
-  /**
-    a
-   / \
-  b  c   a是根节点，与上层父节点相连(如果有)，b、c是子节点，与其各自子节点中路径最大的节点相连
-   所有可能的情况： b+a+c  b+a c+a
-   **/
-  public int getOneSideMaxValue(TreeNode root){
+    public int maxPathSum(TreeNode root) {
+        maxGain(root);
+        return maxVal;
 
-    if(root == null){
-      return 0;
     }
-    // 左子树提供的最大路径和
-    int leftMaxValue = Math.max(0,getOneSideMaxValue(root.left));
-    // 右子树提供的最大路径和
-    int rightMaxValue = Math.max(0,getOneSideMaxValue(root.right));
-    // 当前子树内部的最大路径和并挑战最大纪录
-    maxValue = Math.max(maxValue,leftMaxValue + root.val + rightMaxValue);
-    // 当前子树对外提供的最大路径和
-    int outputMaxSum = root.val + Math.max(leftMaxValue,rightMaxValue);
-    return Math.max(outputMaxSum, 0);
-  }
+
+    //从root出发的子树的最大收益
+    public int maxGain(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        //最大收益必须大于0才有意义，0以下的数字都返回0，即：舍弃该节点
+        int leftGain = Math.max(maxGain(root.left), 0);
+        int rightGain = Math.max(maxGain(root.right), 0);
+        maxVal = Math.max(maxVal, root.val + leftGain + rightGain);
+        //只能返回左子树和右子树的最大值，只能选择一条边，两条边同时选意味着root被经过了两次，不符合提议
+        return root.val + Math.max(leftGain, rightGain);
+
+    }
 }
