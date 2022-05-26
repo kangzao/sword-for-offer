@@ -25,6 +25,7 @@ public class _1008_BstFromPreorder {
     //确定左子树范围,二叉搜索树,左子树的值均小于根节点，右子树的值均大于根节点
     //防止两个节点的情况，所以i = start，而不是i = start + 1
     int i = start;
+    //i + 1 <= end必须写在前面，防止preorder[i + 1]数组越界
     while (i + 1 <= end && preorder[i + 1] < preorder[start]) {
       i++;
     }
