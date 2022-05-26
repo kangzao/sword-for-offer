@@ -43,7 +43,6 @@ public class _863_DistanceK {
 
   //计算从target出发，沿着左子树、右子树、父节点搜索的情况,每进行一次查找node和distance都要更新
   public void calDistance(TreeNode node, TreeNode from, int distance, int k) {
-    System.out.println(from);
     if (node == null) {
       return;
     }
