@@ -15,7 +15,7 @@ package com.jep.github.nowcoder.tree;
  */
 public class GetNext {
 
-  public TreeLinkNode GetNext(TreeLinkNode pNode) {
+  public TreeLinkNode getNext(TreeLinkNode pNode) {
     if (pNode == null) {
       return null;
     }
