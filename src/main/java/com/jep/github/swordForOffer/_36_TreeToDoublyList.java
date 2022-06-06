@@ -36,6 +36,4 @@ public class _36_TreeToDoublyList {
     pre = root;
     dfs(root.right);
   }
-
-
 }
