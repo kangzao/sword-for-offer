@@ -9,6 +9,7 @@ import java.util.List;
  *
  * 输入：root = [1,null,2,3]
    输出：[1,2,3]
+   2022年06月08日16:45:58
  */
 public class _144_PreorderTraversal {
 
