@@ -9,34 +9,25 @@ import java.util.List;
  */
 public class _129_SumNumbers {
 
-  int res = 0;
 
   public int sumNumbers(TreeNode root) {
-    dfs(root, new ArrayList<>());
-    return res;
+    return helper(root, 0);
   }
 
-  public void dfs(TreeNode root, List<Integer> list) {
+  public int helper(TreeNode root, int preSum) {
     if (root == null) {
-      return;
+      return 0;
     }
-    list.add(root.val);
+    //当前节点的计算公式
+    int temp = preSum * 10 + root.val;
+    //递归退出条件
     if (root.left == null && root.right == null) {
-      res += getSum(list);
+      return temp;
     }
-    dfs(root.left, list);
-    dfs(root.right, list);
-    list.remove(list.size() - 1);
+    //分别计算左右子树
+    return helper(root.left, temp) + helper(root.right, temp);
   }
 
-  //路径上的和
-  public int getSum(List<Integer> list) {
-    int sum = 0;
-    for (Integer item : list) {
-      sum = sum * 10 + item;
-    }
-    return sum;
-  }
 
   public static void main(String args[]) {
     TreeNode root = new TreeNode(5);
