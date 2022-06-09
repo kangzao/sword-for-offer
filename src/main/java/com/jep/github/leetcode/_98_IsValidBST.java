@@ -3,12 +3,29 @@ package com.jep.github.leetcode;
 /*
  * @author: enping.jep
  * @create: 2021-01-05 3:43 下午
+ * 2022年06月09日15:30:53
  */
 public class _98_IsValidBST {
 
-  TreeNode pre;
 
   public boolean isValidBST(TreeNode root) {
+    return dfs(root, Long.MIN_VALUE, Long.MAX_VALUE);
+  }
+
+  public boolean dfs(TreeNode root, long start, long end) {
+    if (root == null) {
+      return true;
+    }
+    if (root.val <= start || root.val >= end) {
+      return false;
+    }
+    return dfs(root.left, start, root.val) && dfs(root.right, root.val, end);
+  }
+
+
+  TreeNode pre;
+
+  public boolean isValidBST_better(TreeNode root) {
     if (root == null) {
       return true;
     }

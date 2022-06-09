@@ -43,6 +43,32 @@ public class _113_PathSum {
 
   }
 
+
+/**  2022年06月09日16:23:57
+
+  List<List<Integer>> res = new ArrayList<>();
+  public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+    if(root == null){
+      return res;
+    }
+    dfs(root,targetSum,new ArrayList<Integer>());
+    return res;
+  }
+
+  public void dfs(TreeNode root, int targetSum, List<Integer> path){
+    if(root == null) {
+      return;
+    }
+    path.add(root.val);
+    if(root.val == targetSum && root.left == null && root.right == null){
+      res.add(new ArrayList(path));
+    }
+    dfs(root.left,targetSum - root.val,path);
+    dfs(root.right,targetSum - root.val,path);
+    path.remove(path.size() - 1);
+
+  }
+
   /**
             5
            / \
