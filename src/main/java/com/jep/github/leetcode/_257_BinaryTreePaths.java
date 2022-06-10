@@ -35,29 +35,22 @@ public class _257_BinaryTreePaths {
     }
     //回溯，递归左子树，当root.left为空的时候，返回到处理root节点的代码，然后递归右子树，root.right为空返回处理root节点的代码，此时root这颗子树处理完毕，接着向上返回到root的父节点：root.root，因此每遍历完一颗子树都要对结果集进行处理
     //这里使用setLength，是因为len的长度如果是变小了，则时间复杂度是O(1),如果是扩大，则为O(n)
+    System.out.println("root:" + root.val + ",path:" + path);
     path.setLength(len);
+    System.out.println("backtrace:" + path);
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  /**
+   *         1
+   *       2   3
+   *     4   5
+   */
   public static void main(String args[]) {
     TreeNode root = new TreeNode(1);
     root.left = new TreeNode(2);
     root.right = new TreeNode(3);
-    root.left.right = new TreeNode(5);
+//    root.left.right = new TreeNode(5);
+//    root.left.left = new TreeNode(4);
 
     _257_BinaryTreePaths btp = new _257_BinaryTreePaths();
     btp.binaryTreePaths(root);
