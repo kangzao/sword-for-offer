@@ -9,59 +9,33 @@ import java.util.List;
  */
 public class _257_BinaryTreePaths {
 
-//  public List<String> binaryTreePaths(TreeNode root) {
-//    List<String> list = new ArrayList();
-//    if (root == null) {
-//      return list;
-//    }
-//    StringBuilder sb = new StringBuilder();
-//    dfs(root, sb, list);
-//    return list;
-//  }
-//
-//  public void dfs(TreeNode root, StringBuilder sb, List<String> list) {
-//
-//    if (root.left == null && root.right == null) {
-//      sb.append(root.val);
-//      list.add(sb.toString());
-//      return;
-//    }
-//    sb.append(root.val);
-//    if (root.left != null) {
-//      dfs(root.left, new StringBuilder(sb).append("->"), list);
-//    }
-//    if (root.right != null) {
-//      dfs(root.right, new StringBuilder(sb).append("->"), list);
-//    }
-//  }
+  List<String> res = new ArrayList<>();
 
   public List<String> binaryTreePaths(TreeNode root) {
-    if (root == null) {
-      return null;
-    }
-    List<String> list = new ArrayList<>();
-    StringBuilder sb = new StringBuilder();
-    dfs(root, sb, list);
-    return list;
+    dfs(root, new StringBuilder());
+    return res;
   }
 
-  public void dfs(TreeNode root, StringBuilder sb, List<String> list) {
-    System.out.println(root.val);
-    //如果是叶子节点
-    if (root.left == null && root.right == null) {
-      sb.append(root.val + "");
-      list.add(sb.toString());//走到叶子节点后，加入到集合中
+  //递归函数，遍历整棵树，将符合条件的路径加入到结果中
+  public void dfs(TreeNode root, StringBuilder path) {
+    if (root == null) {
       return;
     }
-    sb.append(root.val);
-    System.out.println("递归前sb:" + sb);
-    if (root.left != null) {
-      dfs(root.left, new StringBuilder(sb).append("->"), list);
+    //路径的初始长度
+    int len = path.length();
+    path.append(root.val);
+    //走到了叶子节点，说明已经找到了符合条件的路径，将路径加入到结果集中，如果在这一步就return，必须加上path.setLength(len)
+    //因为下面有递归，递归是从下往上返回，递归完左右子树，意味着这颗子树递归完了，此时离开了root节点，向上返回，需要修改path变量
+    if (root.left == null && root.right == null) {
+      res.add(path.toString());
+    } else {
+      path.append("->");
+      dfs(root.left, path);
+      dfs(root.right, path);
     }
-    if (root.right != null) {
-      dfs(root.right, new StringBuilder(sb).append("->"), list);
-    }
-    System.out.println("递归后sb:" + sb);
+    //回溯，递归左子树，当root.left为空的时候，返回到处理root节点的代码，然后递归右子树，root.right为空返回处理root节点的代码，此时root这颗子树处理完毕，接着向上返回到root的父节点：root.root，因此每遍历完一颗子树都要对结果集进行处理
+    //这里使用setLength，是因为len的长度如果是变小了，则时间复杂度是O(1),如果是扩大，则为O(n)
+    path.setLength(len);
   }
 
   public static void main(String args[]) {
