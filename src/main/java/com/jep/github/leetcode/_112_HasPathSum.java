@@ -3,6 +3,7 @@ package com.jep.github.leetcode;
 /*
  * @author: enping.jep
  * @create: 2021-04-09 3:05 下午
+ * 2022年06月13日15:10:25
  */
 public class _112_HasPathSum {
 
@@ -15,11 +16,18 @@ public class _112_HasPathSum {
     if (root == null) {
       return false;
     }
-    if (root.left == null && root.right == null) {
-      return root.val == targetSum;
+    return dfs(root, targetSum);
+  }
+
+  public boolean dfs(TreeNode root, int targetSum) {
+    if (root == null) {
+      return false;
     }
-    return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right,
-        targetSum - root.val);
+    if (root.left == null && root.right == null) {
+      return targetSum == root.val;
+    }
+    return dfs(root.left, targetSum - root.val) || dfs(root.right, targetSum - root.val);
+
 
   }
 
