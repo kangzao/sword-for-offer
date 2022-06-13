@@ -3,27 +3,30 @@ package com.jep.github.leetcode;
 /*
  * @author: enping.jep
  * @create: 2021-04-07 5:26 下午
+ * 2022年06月13日14:53:21
  */
 public class _543_DiameterOfBinaryTree {
 
 
-  int max = 0;
+  int res = 0;
 
   public int diameterOfBinaryTree(TreeNode root) {
-    depth(root);
-    return max;
+    //经过root要么沿着左子树向下，要么沿着右子树向下
+    //即：左子树最大深度 + 右子树最大深度- 1
+    dfs(root);
+    return res - 1;
+
   }
 
-  // 一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过也可能不穿过根结点。
-  // 两个叶子节点之间的路径 = 根节点左右儿子的深度之和(深度指当前节点的层数，比如：叶子节点深度为1)
-  public int depth(TreeNode root) {
+  //求root为根的树的最大深度
+  public int dfs(TreeNode root) {
     if (root == null) {
       return 0;
     }
-    int left = depth(root.left);
-    int right = depth(root.right);
-    max = Math.max(max, left + right);
-    //返回节点深度 左子树深度和右子树深度的最大值+1
+
+    int left = dfs(root.left);//左子树的最大深度，向左，求左子树的最大深度
+    int right = dfs(root.right);//右子树的最大深度，向右，求右子树的最大深度
+    res = Math.max(left + right + 1, res);//当前节点的最大深度，即：向左走的最大深度+向右走的最大深度+1
     return Math.max(left, right) + 1;
   }
 
