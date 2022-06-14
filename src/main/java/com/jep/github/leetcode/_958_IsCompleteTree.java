@@ -10,13 +10,12 @@ import java.util.Queue;
  */
 public class _958_IsCompleteTree {
 
-  //思路：把一颗树的节点（包括空节点）按层序遍历排成一行，当且仅当存在两个相邻节点：前一个为null，后一个不为null时，才不是不是完全二叉树。
+  //思路：把一颗树的节点（包括空节点）按层序遍历排成一行，将null也加入到列表中，当且仅当存在两个相邻节点：前一个为null，后一个不为null时，才不是完全二叉树。
   public boolean isCompleteTree(TreeNode root) {
     Queue<TreeNode> queue = new LinkedList<>();
     TreeNode prev = root;
     queue.add(root);
     while (!queue.isEmpty()) {
-
       TreeNode node = queue.poll();
       if (prev == null && node != null) {
         return false;
@@ -27,7 +26,6 @@ public class _958_IsCompleteTree {
       }
       prev = node;
     }
-
     return true;
   }
 
