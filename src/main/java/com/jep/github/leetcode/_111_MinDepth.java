@@ -1,41 +1,38 @@
 package com.jep.github.leetcode;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /*
  * @author: enping.jep
  * @create: 2021-04-13 7:43 下午
  */
 public class _111_MinDepth {
 
-//  public int minDepth(TreeNode root) {
-//    if (root == null) {
-//      return 0;
-//    }
-//    int leftDepth = minDepth(root.left);
-//    int rightDepth = minDepth(root.right);
-//
-//    return root.left == null || root.right == null ? leftDepth + rightDepth + 1
-//        : Math.min(leftDepth, rightDepth) + 1;
-//
-//  }
-
-
-  public int minDepth_1(TreeNode root) {
-
-    int res = Integer.MAX_VALUE;
-    if (root.left == null && root.right == null) {
-      return 1;
+  public int minDepth(TreeNode root) {
+    if (root == null) {
+      return 0;
     }
-    if (root.left != null) {
-      res = Math.min(minDepth_1(root.left), res);
+    Deque<TreeNode> deque = new ArrayDeque();
+    deque.offer(root);
+    int depth = 1;
+    while (!deque.isEmpty()) {
+      int len = deque.size();
+      for (int i = 0; i < len; i++) {
+        TreeNode node = deque.poll();
+        if (node.left == null && node.right == null) {
+          return depth;
+        }
+        if (node.left != null) {
+          deque.offer(node.left);
+        }
+        if (node.right != null) {
+          deque.offer(node.right);
+        }
+      }
+      depth++;
     }
-
-    if (root.right != null) {
-      System.out.println(root.val + "before res==" + res);
-      res = Math.min(minDepth_1(root.right), res);
-      System.out.println(root.val + "after res==" + res);
-    }
-
-    return res + 1;
+    return depth;
   }
 
   public static void main(String args[]) {
@@ -45,7 +42,7 @@ public class _111_MinDepth {
     root.right.right.right = new TreeNode(5);
     root.right.right.right.right = new TreeNode(6);
     _111_MinDepth minDepth = new _111_MinDepth();
-    System.out.println(minDepth.minDepth_1(root));
+    System.out.println(minDepth.minDepth(root));
   }
 
 }
