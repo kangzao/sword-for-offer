@@ -22,13 +22,13 @@ public class _26_IsSubStructure {
     // 1.B的子结构起点为A的根节点,此时结果为recur(A,B)
     // 2.B的子结构起点隐藏在A的左子树中,而不是直接为A的根节点,此时结果为isSubStructure(A.left, B)
     // 3.B的子结构起点隐藏在A的右子树中,此时结果为isSubStructure(A.right, B)
-    return recur(A, B) || isSubStructure(A.left, B) || isSubStructure(A.right, B);
+    return isContain(A, B) || isSubStructure(A.left, B) || isSubStructure(A.right, B);
   }
 
   /*
   判断B是否为A的子结构,其中B子结构的起点为A的根节点
   */
-  private boolean recur(TreeNode A, TreeNode B) {
+  private boolean isContain(TreeNode A, TreeNode B) {
     // 若B走完了,说明查找完毕,B为A的子结构
     if (B == null) {
       return true;
@@ -40,7 +40,7 @@ public class _26_IsSubStructure {
     // 当A与B当前节点值相等,若要判断B为A的子结构
     // 还需要判断B的左子树是否为A左子树的子结构 && B的右子树是否为A右子树的子结构
     // 若两者都满足就说明B是A的子结构,并且该子结构以A根节点为起点
-    return recur(A.left, B.left) && recur(A.right, B.right);
+    return isContain(A.left, B.left) && isContain(A.right, B.right);
   }
 
 }
