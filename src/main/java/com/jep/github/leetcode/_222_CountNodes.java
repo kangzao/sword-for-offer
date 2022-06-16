@@ -3,8 +3,10 @@ package com.jep.github.leetcode;
 /*
  * @author: enping.jep
  * @create: 2022-05-24 4:57 下午
+ * 2022年06月16日20:06:52
  * 完全二叉树的定义：除最后一层外，其余层全部铺满；且最后一层向左停靠
  * 如果满二叉树的层数为h，则总节点数为：2^h - 1
+ * 1 << n就代表2的n次方
  */
 public class _222_CountNodes {
 
