@@ -17,15 +17,42 @@ public class _863_DistanceK {
   Map<Integer, TreeNode> map = new HashMap<>();
   List<Integer> res = new ArrayList<>();
 
-  //距离为K的计算方式有三种：向左子树、右子树和向上通过父节点计算，考虑使用三路递归来做
   public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
-    getParent(root);
-    calDistance(target, null, 0, k);
+    if (root == null) {
+      return res;
+    }
+    getParents(root);
+    dfs(target, null, 0, k);
     return res;
   }
 
-  //遍历节点，记录每个节点的父节点
-  public void getParent(TreeNode root) {
+  //从target出发，有三种选择，左右上，记录距离target为k的节点
+  public void dfs(TreeNode target, TreeNode from, int distance, int k) {
+    if (target == null) {
+      return;
+    }
+
+    if (distance == k) {
+      res.add(target.val);
+    }
+    //向左走，防止向左走了之后再走回来这种情况,判断到达该节点的起始节点，是否是此次要去的节点，如果是，则会走回头路，需要排除
+    //不能出现from走到target，再从target走回from的情况
+    if (target.left != from) {
+      dfs(target.left, target, distance + 1, k);
+    }
+    if (target.right != from) {
+      //向右走
+      dfs(target.right, target, distance + 1, k);
+    }
+    TreeNode parent = map.get(target.val);
+    if (parent != from) {
+      //向上走
+      dfs(map.get(target.val), target, distance + 1, k);
+    }
+  }
+
+  //建立子节点和父节点之间的映射关系
+  public void getParents(TreeNode root) {
     if (root == null) {
       return;
     }
@@ -37,29 +64,8 @@ public class _863_DistanceK {
     if (right != null) {
       map.put(right.val, root);
     }
-    getParent(root.left);
-    getParent(root.right);
-  }
-
-  //计算从target出发，沿着左子树、右子树、父节点搜索的情况,每进行一次查找node和distance都要更新
-  public void calDistance(TreeNode node, TreeNode from, int distance, int k) {
-    if (node == null) {
-      return;
-    }
-    if (distance == k) {
-      res.add(node.val);
-    }
-    //防止走回头路,排除向上走再向下走，最后回到target的情况出现
-    if (node.left != from) {
-      calDistance(node.left, node, distance + 1, k);
-    }
-    if (node.right != from) {
-      calDistance(node.right, node, distance + 1, k);
-    }
-    TreeNode parent = map.get(node.val);
-    if (parent != from) {
-      calDistance(parent, node, distance + 1, k);
-    }
+    getParents(root.left);
+    getParents(root.right);
 
   }
 

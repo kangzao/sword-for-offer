@@ -18,46 +18,46 @@ package com.jep.github.swordForOffer;
 //              \     /
 //               7   8
 
+import com.jep.github.leetcode.TreeNode;
 import java.util.HashMap;
 
 //Preorder traversal 前序遍历
 //inorder traversal  中序遍历
 public class _07_ConstructBinaryTree {
 
-  private static HashMap<Integer, Integer> inOrderNumsIdx = new HashMap<Integer, Integer>(); // 缓存中序遍历数组的每个值对应的索引
+  private static HashMap<Integer, Integer> map = new HashMap<Integer, Integer>(); // 缓存中序遍历数组的每个值对应的索引
 
   /**
    * @param pre 前序遍历数组
    * @param in 中序遍历数组
    * @return 二叉树
    */
-  public static BinaryTreeNode reConstructBinaryTree(int[] pre, int[] in) {
-    for (int i = 0; i < in.length; i++) {
-      inOrderNumsIdx.put(in[i], i);
+  public static TreeNode reConstructBinaryTree(int[] preorder, int[] inorder) {
+    for (int i = 0; i < inorder.length; i++) {
+      map.put(inorder[i], i);
     }
-    return reConstructBinaryTree(pre, 0, pre.length - 1, in, 0, in.length - 1);
+    return build(preorder, 0, preorder.length - 1, 0, inorder.length - 1);
   }
 
-  private static BinaryTreeNode reConstructBinaryTree(int[] pre, int preL, int preR, int[] in,
-      int inL, int inR) {
-    if (preL > preR || inL > inR) {
+  public static TreeNode build(int[] preorder, int preStart, int preEnd, int inStart, int inEnd) {
+    if (preStart > preEnd || inStart > inEnd) {
       return null;
     }
-    BinaryTreeNode treeNode = new BinaryTreeNode(pre[preL]);
-    int index = inOrderNumsIdx.get(pre[preL]);
-    int leftTreeSize = index - inL;//左子树长度
-    treeNode.left = reConstructBinaryTree(pre, preL + 1, preL + leftTreeSize, in, inL,
-        inR + leftTreeSize - 1);
-    treeNode.right = reConstructBinaryTree(pre, preL + leftTreeSize + 1, preR, in,
-        inL + leftTreeSize + 1, inR);
-    return treeNode;
+    int val = preorder[preStart];
+    TreeNode root = new TreeNode(val);
+    //根节点在中序遍历中的索引
+    int rootIndex = map.get(val);
+    int leftLen = rootIndex - inStart;
+    root.left = build(preorder, preStart + 1, preStart + leftLen, inStart, rootIndex - 1);
+    root.right = build(preorder, preStart, preStart + leftLen + 1, rootIndex + 1, inEnd);
+    return root;
 
   }
 
   public static void main(String args[]) {
     int[] preorder = {1, 2, 4, 7, 3, 5, 6, 8};
     int inorder[] = {4, 7, 2, 1, 5, 3, 8, 6};
-    BinaryTreeNode node = reConstructBinaryTree(preorder, inorder);
+    TreeNode node = reConstructBinaryTree(preorder, inorder);
     System.out.println(node);
 
   }
