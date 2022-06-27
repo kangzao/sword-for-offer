@@ -25,7 +25,7 @@ public class _889_ConstructFromPrePost {
     if (preStart > preEnd) {
       return null;
     }
-
+    //遍历到前序遍历的最后一个元素上，后面没有元素了，所以直接返回，否则int leftRootVal = preorder[preStart + 1]要报数组越界的错误
     if (preStart == preEnd) {
       return new TreeNode(preorder[preStart]);
     }
