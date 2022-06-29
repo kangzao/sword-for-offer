@@ -28,7 +28,7 @@ public class GetNext {
       return right;
     }
 
-    //如果没有右子树，分两种情况:第一种是位于父节点的左子树，比如：g
+    //如果没有右子树，分两种情况:第一种是位于父节点的左子树，比如：g，则返回该节点的父节点
     if (pNode.next != null && pNode.next.left == pNode) {
       return pNode.next;
     }
