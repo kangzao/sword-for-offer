@@ -7,19 +7,18 @@ package com.jep.github.leetcode;
 public class _42_Trap {
 
   public int trap(int[] height) {
-    int left_max = Integer.MIN_VALUE, right_max = Integer.MIN_VALUE;
+    int leftMax = 0, rightMax = 0;//左侧最大值和右侧最大值
+    int left = 0, right = height.length - 1;//双指针，从左右两侧往中间移动
     int res = 0;
-    for (int left = 0, right = height.length - 1; left <= right; ) {
-      left_max = Math.max(left_max, height[left]);
-      right_max = Math.max(right_max, height[right]);
-      //能否蓄水取决于左侧最大和右侧最大的关系，如果左侧较大，根据木桶原理，右侧的位置可以确定蓄水量
-      //如果如果右侧较大，那左侧的位置可以确定蓄水量
-      if (left_max < right_max) {
-        //计算左侧的蓄水量
-        res += left_max - height[left];
+    while (left <= right) {
+      leftMax = Math.max(leftMax, height[left]);
+      rightMax = Math.max(rightMax, height[right]);
+      //如果左边的最大值比右侧小，左侧可信，盛水量为较小的左侧最大值减去当前值
+      if (leftMax <= rightMax) {
+        res += leftMax - height[left];
         left++;
       } else {
-        res += right_max - height[right];
+        res += rightMax - height[right];
         right--;
       }
     }
