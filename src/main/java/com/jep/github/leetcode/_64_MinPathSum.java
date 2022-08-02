@@ -24,11 +24,11 @@ public class _64_MinPathSum {
     int n = grid[0].length;
     int[][] dp = new int[m][n];//dp[i][j]表示从左上角移动到grid[i][j]的最短路径
     dp[0][0] = grid[0][0];
-    //第一列 只能向下
+    //第一列 只能从上向下
     for (int i = 1; i < m; i++) {
       dp[i][0] = dp[i - 1][0] + grid[i][0];
     }
-    //第一行 只能向右
+    //第一行 只能从左向右
     for (int i = 1; i < n; i++) {
       dp[0][i] = dp[0][i - 1] + grid[0][i];
     }
