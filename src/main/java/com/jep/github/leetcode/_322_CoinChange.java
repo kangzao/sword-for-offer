@@ -1,6 +1,8 @@
 package com.jep.github.leetcode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /*
  * @author: enping.jep
@@ -92,6 +94,7 @@ public class _322_CoinChange {
     dp[0] = 0;
     for (int i = 1; i <= amount; i++) {
       for (int j = 0; j < coins.length; j++) {
+
         if (coins[j] <= i && dp[i - coins[j]] != amount + 1) {
           dp[i] = Math.min(dp[i], 1 + dp[i - coins[j]]);
         }
@@ -106,7 +109,10 @@ public class _322_CoinChange {
 
 
   public static void main(String args[]) {
-
+    List<String> list = new ArrayList<>();
+    list.add("abc");
+    list.add("def");
+    System.out.println(list);
   }
 
 }
