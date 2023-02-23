@@ -1,4 +1,4 @@
-package com.jep.github.designpattern.singleton.seriable;
+package com.jep.github.designpattern.singleton.serialize;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
