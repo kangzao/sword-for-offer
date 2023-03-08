@@ -2,6 +2,7 @@ package com.jep.github.designpattern.prototype.simple;
 
 import java.util.List;
 
+//创建具体需要克隆的对象
 public class ConcretePrototypeA implements Prototype {
 
   private int age;

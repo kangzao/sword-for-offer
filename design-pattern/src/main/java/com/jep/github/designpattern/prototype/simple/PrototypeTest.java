@@ -12,8 +12,9 @@ public class PrototypeTest {
     concretePrototype.setName("prototype");
     List hobbies = new ArrayList<String>();
     concretePrototype.setHobbies(hobbies);
-    System.out.println(concretePrototype);// 创建 Client 对象，准备开始克隆
-    Client client = new Client(concretePrototype);
+    System.out.println(concretePrototype);
+
+    Client client = new Client(concretePrototype);// 创建 Client 对象，准备开始克隆
     ConcretePrototypeA concretePrototypeClone = (ConcretePrototypeA)
         client.startClone(concretePrototype);
     System.out.println(concretePrototypeClone);

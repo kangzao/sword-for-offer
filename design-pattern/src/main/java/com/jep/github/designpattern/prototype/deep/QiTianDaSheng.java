@@ -34,7 +34,7 @@ public class QiTianDaSheng extends Monkey implements Cloneable, Serializable {
       ObjectInputStream ois = new ObjectInputStream(bis);
 
       QiTianDaSheng copy = (QiTianDaSheng) ois.readObject();
-      copy.birthday = new Date();
+//      copy.birthday = new Date();
       return copy;
 
     } catch (Exception e) {
