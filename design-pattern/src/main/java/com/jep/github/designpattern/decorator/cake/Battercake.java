@@ -1,4 +1,4 @@
-package com.jep.github.designpattern.decorator;
+package com.jep.github.designpattern.decorator.cake;
 
 public abstract class Battercake {
 

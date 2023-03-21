@@ -1,4 +1,7 @@
-package com.jep.github.designpattern.decorator;
+package com.jep.github.designpattern.decorator.cake;
+
+import com.jep.github.designpattern.decorator.cake.Battercake;
+import com.jep.github.designpattern.decorator.cake.BattercakeDecorator;
 
 public class EggDecorator extends BattercakeDecorator {
 
