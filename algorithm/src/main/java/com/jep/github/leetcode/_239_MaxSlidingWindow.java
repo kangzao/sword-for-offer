@@ -56,7 +56,7 @@ public class _239_MaxSlidingWindow {
     LinkedList<Integer> linkedList = new LinkedList<>();
     int[] result = new int[nums.length - k + 1];
     for (int i = 0; i < nums.length; i++) {
-      //判断头部是否有效,如果无效，就把头部移除
+      //判断头部是否有效,如果无效，就把头部移除  当队首元素在原数组中的下标小于窗口左边界时，队首元素就需要移除队列。
       if (!linkedList.isEmpty() && linkedList.peek() <= i - k) {
         linkedList.poll();
       }
